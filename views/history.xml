@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_historial_telyman_tree" model="ir.ui.view">
+                <field name="name">telyman.historial.tree</field>
+                <field name="model">telyman.historial</field>
+                <field name="priority" eval="5" />
+                <field name="arch" type="xml">
+                    <tree string="Item">
+
+                         <field name="historial_fecha"/>
+                         <field name="historial_descripcion"/>
+                        <field name="historial_DU"/>
+
+                         <field name="historial_porcentaje_avance"/>
+                         <field name="tipo_tecnologia"/>
+                         <field name="tipo_partner"/>
+                        <field name="historial_fecha_entrega_materiales"/>
+
+                        <field name="historial_proyecto_asociado"/>
+                        <field name="historial_fecha_planific_inst"/>
+                        <field name="historial_fecha_inic_inst"/>
+                        <field name="historial_fecha_fin_inst"/>
+                    </tree>
+                </field>
+            </record>
+    <record id="view_historial_telyman_form" model="ir.ui.view">
+        <field name="name">telyman.historial.form</field>
+        <field name="model">telyman.historial</field>
+        <field name="priority" eval="5"/>
+        <field name="arch" type="xml">
+            <form string="Historial Proyecto">
+                <sheet>
+                    <group>
+                          <group name="codes" string="Datos Historial">
+                             <field name="historial_fecha"/>
+                             <field name="historial_descripcion"/>
+                             <field name="historial_fecha_entrega_materiales"/>
+                             <field name="historial_materiales"/>
+                              <field name="historial_DU"/>
+                             <field name="historial_porcentaje_avance"/>
+                             <field name="tipo_tecnologia"/>
+                             <field name="tipo_partner"/>
+                             <field name="historial_PO"/>
+                           </group>
+                            <group name="codes" string="Datos Proyecto Relacionado">
+                                <field name="historial_proyecto_asociado"/>
+                                <field name="historial_cod_sitio"/>
+                                <field name="historial_fecha_planific_inst"/>
+                                <field name="historial_fecha_inic_inst"/>
+                                <field name="historial_fecha_fin_inst"/>
+                            </group>
+                    </group>
+          <group>
+               <field name="historial_observaciones"/>
+          </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_view_historial_telyman">
+        <field name="name">Historial Nuevo </field>
+        <field name="res_model">telyman.historial</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+        <p class="oe_view_nocontent_create">Historial</p>
+        </field>
+    </record>
+</odoo>

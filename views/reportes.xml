@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record id="paperformat_euro_copy" model="report.paperformat">
+            <field name="name">European A4 Horizontal</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+
+<!--   *******************************************   Reportes Instalaciones  ********************************************************-->
+
+
+
+<!--   ****************************************  Reporte Instalaciones Documentacion************************************************     -->
+        <record id="view_control_instalaciones_Reporte1_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones_reporte1.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+
+                <tree string="Reporte Instalaciones">
+                    <field name="name" string="Cod Proy"/>
+                    <field name="cod_sitio" string="Cod Sitio"/>
+                    <field name="nombre_sitio" string="Nombre Sitio"/>
+                    <field name="nombre_proyecto" string="Nombre Proyecto"/>
+                    <field name="tipo_trabajo" string="Tipo Trabajo"/>
+                    <field name="operador" string="Operador"/>
+                    <field name="cliente"/>
+                    <field name="supervisor_cliente" string="Supervisor"/>
+                    <field name="jefe_cuadrilla_inst" string="Jefe Cuadrilla"/>
+                    <field name="fecha_inic_inst" string="Fecha Inicio Instal"/>
+                    <field name="fecha_fin_inst" string="Fecha Fin Instal"/>
+                    <field name="sup_telyman_inst" string="Sup Telyman"/>
+
+                    <field name="planos_docu" string="Planos"/>
+                    <field name="planos_fecha_recibido_docu" string="Plano Recibido"/>
+                    <field name="planos_realizado_aprob_docu" string="Plano Aprobado"/>
+                    <field name="planos_fecha_envio_cliente_docu" string="Plano Fecha Cliente"/>
+                    <field name="planos_envio_cliente_aprobado_docu" string="Plano Cliente Aprobado"/>
+
+                    <field name="foto_docu" string="Fotografía"/>
+                    <field name="foto_fecha_recibido_docu" string="Foto Recibida"/>
+                    <field name="foto_realizado_aprob_docu" string="Foto Aprobada"/>
+                    <field name="foto_fecha_envio_cliente_docu" string="Foto Fecha Cliente"/>
+                    <field name="foto_envio_cliente_aprobado_docu" string="Foto Cliente Aprobado"/>
+
+                    <field name="AS_build_docu" string="AS-Build"/>
+                    <field name="AS_build_fecha_recibido_docu" string="AS-Bulid Recibido"/>
+                    <field name="AS_build_realizado_aprob_docu" string="AS-Build Aprobada"/>
+                    <field name="AS_build_fecha_envio_cliente_docu" string="AS-Build Fecha Cliente"/>
+                    <field name="AS_build_envio_cliente_aprobado_docu" string="AS-Build Cliente Aprobado"/>
+
+
+                    <field name="ATP_docu" string="APT"/>
+                    <field name="ATP_fecha_recibido_docu" string="APT Recibido"/>
+                    <field name="ATP_realizado_aprob_docu" string="APT Aprobada"/>
+                    <field name="ATP_fecha_envio_cliente_docu" string="APT Fecha Cliente"/>
+                    <field name="ATP_envio_cliente_aprobado_docu" string="APT Cliente Aprobado"/>
+
+                    <field name="EHS_docu" string="EHS"/>
+                    <field name="EHS_fecha_recibido_docu" string="EHS Recibido"/>
+                    <field name="EHS_realizado_aprob_docu" string="EHS Aprobado"/>
+                    <field name="EHS_fecha_envio_cliente_docu" string="EHS Fecha Cliente"/>
+                    <field name="EHS_envio_cliente_aprobado_docu" string="EHS Cliente Aprobado"/>
+   <!--    -->
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_control_instalaciones_Reporte1">
+            <field name="name">Reporte Instalaciones Documentación</field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_control_instalaciones_Reporte1_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Reporte Instalacion</p>
+            </field>
+        </record>
+
+<!--   ********************************************************************************************************     -->
+
+
+<!--***************************************Reporte   Contratas Por Fecha****************************************************************-->
+       <record id="view_contratas_reporte1_tree" model="ir.ui.view">
+            <field name="name">contrata.item.reporte1.tree</field>
+            <field name="model">contrata.item</field>
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+                <tree string="Reporte Contratas">
+                    <field name="name"/>
+                    <field name="contrata_id"/>
+                    <field name="aceptado"/>
+                    <field name="telyman_core_id"/>
+                    <field name="telyman_core_id_cod_sitio"/>
+                    <field name="telyman_core_id_fecha_inic_inst"/>
+     <!--             -->
+                </tree>
+            </field>
+        </record>
+      <record model="ir.actions.act_window" id="action_view_contratas_reporte1">
+            <field name="name">Contratas OP/Fecha</field>
+            <field name="res_model">contrata.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_contratas_reporte1_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo Contratas Item</p>
+            </field>
+        </record>
+<!--   ********************************************************************************************************     -->
+
+ <!--      -->
+<!--*******************************************Reporte Seguimiento PTE Facturar  Item Jessica  ************************************************************-->
+        <record id="view_item_reporte1_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+                     <field name="name"/>
+                     <field name="ud"/>
+                     <field name="precio_unitario"/>
+                     <field name="precio_total"/>
+                     <field name="n_po"/>
+                     <field name="state"/>
+                     <field name="fecha_pac"/>
+                     <field name="fecha_fac"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_item_reporte1">
+            <field name="name">Reporte Seguimiento PTE Facturar </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_item_reporte1_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un nuevo Item</p>
+            </field>
+        </record>
+
+
+
+<!--*******************************************Reporte PO Facturadas  ************************************************************-->
+        <record id="view_item_reporte2_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="14" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+                    <field name="name"/>
+                    <field name="n_po"/>
+                     <field name="ud"/>
+                     <field name="precio_unitario"/>
+                     <field name="precio_total"/>
+                     <field name="fecha_pac"/>
+                     <field name="fecha_fac"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_item_reporte2">
+            <field name="name">Reporte PO X Factura </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+
+            <field name="view_id" ref="view_item_reporte2_tree"/>
+
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un nuevo Item</p>
+            </field>
+        </record>
+
+
+<!--*******************************************Reporte PO Fechas  ************************************************************-->
+        <record id="view_item_reporte3_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="13" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+                     <field name="control_instalaciones_relacionado_cod_Proyecto"/>
+                    <field name="control_instalaciones_relacionado_cod_sitio"/>
+                    <field name="control_instalaciones_relacionado_nombre_sitio"/>
+                    <field name="control_instalaciones_relacionado_nombre_proyecto"/>
+                    <field name="name"/>
+                    <field name="n_po"/>
+                    <field name="fecha_estado_po"/>
+                    <field name="state"/>
+                    <field name="ud"/>
+                    <field name="precio_unitario"/>
+                    <field name="precio_total"/>
+
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_item_reporte3">
+            <field name="name">Reporte PO X Fechas </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_item_reporte3_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">C</p>
+            </field>
+        </record>
+
+<!--*******************************************Reporte Fac enviado X Fecha ************************************************************-->
+        <record id="view_item_reporte4_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="12" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+                    <field name="control_instalaciones_relacionado_cod_sitio"/>
+                    <field name="control_instalaciones_relacionado_nombre_sitio"/>
+                    <field name="name"/>
+                    <field name="n_po"/>
+                    <field name="ud"/>
+                    <field name="precio_unitario"/>
+                    <field name="precio_total"/>
+                    <field name="fac_enviado"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_item_reporte4">
+            <field name="name">Reporte Fac enviado X Fecha </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_item_reporte4_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">C</p>
+            </field>
+        </record>
+
+
+
+<!--*******************************************Reporte Pac enviado X Fecha ************************************************************-->
+        <record id="view_item_reporte5_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+                    <field name="control_instalaciones_relacionado_cod_sitio"/>
+                    <field name="control_instalaciones_relacionado_nombre_sitio"/>
+                    <field name="name"/>
+                    <field name="n_po"/>
+                    <field name="ud"/>
+                    <field name="precio_unitario"/>
+                    <field name="precio_total"/>
+                    <field name="pac_enviado"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_item_reporte5">
+            <field name="name">Reporte Pac enviado X Fecha </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_item_reporte5_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">C</p>
+            </field>
+        </record>
+
+
+
+
+<!--*******************************************Reporte Greivin ************************************************************-->
+        <record id="view_instalacion_reporte1_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+                <tree string="Instalacion">
+                    <field name="name"/>
+                    <field name="cod_sitio"/>
+                    <field name="nombre_sitio"/>
+                    <field name="cliente"/>
+                    <field name="jefe_cuadrilla_inst"/>
+                    <field name="sup_telyman_inst"/>
+                    <field name="fecha_fin_inst"/>
+                    <field name="fecha_produccion_inst"/>
+                    <field name="seg_administrativo"/>
+                    <field name="seg_tecnico"/>
+                    <field name="items_relacionados_precio_total_aprobado" string="Total Aprobado"/>
+                    <field name="items_relacionados_precio_total_solicitado" string="Total Solicitado"/>
+                    <field name="items_relacionados_pac_facturado" string="PAC Facturado"/>
+                    <field name="items_relacionados_fac_facturado" string="FAC Facturado"/>
+                    <field name="items_relacionados_pac_fecha" string="PAC Fecha"/>
+                    <field name="items_relacionados_fac_fecha" string="FAC Fecha"/>
+
+
+                </tree>
+            </field>
+        </record>
+   <!--  -->
+
+        <record model="ir.actions.act_window" id="action_view_instalacion_reporte1">
+            <field name="name">Reporte Instalaciones Total Aprobados </field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_instalacion_reporte1_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">C</p>
+            </field>
+        </record>
+
+
+
+
+<!--*******************************************Reporte por Seguimiento Tecnico ************************************************************-->
+
+
+
+      <record id="view_instalacion_reporte2_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="14" />
+            <field name="arch" type="xml">
+                <tree string="Rep Seguimiento Tecnico">
+                    <field name="name"/>
+                    <field name="cod_sitio"/>
+                    <field name="nombre_sitio"/>
+                    <field name="nombre_proyecto"/>
+                    <field name="tipo_trabajo"/>
+                    <field name="fecha_inic_inst"/>
+                    <field name="fecha_fin_inst"/>
+                    <field name="fecha_produccion_inst"/>
+                    <field name="jefe_cuadrilla_inst"/>
+                    <field name="seg_tecnico"/>
+
+<!--
+                 <field name="sup_telyman_inst"/>
+                 <field name="seg_administrativo"/>
+
+ -->
+
+                </tree>
+            </field>
+        </record>
+   <!--  -->
+
+        <record model="ir.actions.act_window" id="action_view_instalacion_reporte2">
+            <field name="name">Reporte Seguimiento Tecnico </field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_instalacion_reporte2_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            </field>
+        </record>
+
+
+
+<!--*******************************************Reporte por Seguimiento Administrativo ************************************************************-->
+
+
+
+      <record id="view_instalacion_reporte3_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="13" />
+            <field name="arch" type="xml">
+                <tree string="Rep Seguimiento Administrativo">
+                    <field name="name"/>
+                    <field name="cod_sitio"/>
+                    <field name="nombre_sitio"/>
+                    <field name="nombre_proyecto"/>
+                    <field name="tipo_trabajo"/>
+                    <field name="fecha_inic_inst"/>
+                    <field name="fecha_fin_inst"/>
+                    <field name="fecha_produccion_inst"/>
+                    <field name="jefe_cuadrilla_inst"/>
+                    <field name="seg_administrativo"/>
+                </tree>
+            </field>
+        </record>
+   <!--  -->
+
+        <record model="ir.actions.act_window" id="action_view_instalacion_reporte3">
+            <field name="name">Reporte Seguimiento Tecnico </field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_instalacion_reporte3_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            </field>
+        </record>
+
+
+<!--*******************************************Reporte por Seguimiento************************************************************-->
+
+
+
+      <record id="view_instalacion_reporte4_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="12" />
+            <field name="arch" type="xml">
+                <tree string="Rep Seguimiento Tecnico y Administrativo">
+                    <field name="name"/>
+                    <field name="cod_sitio"/>
+                    <field name="nombre_sitio"/>
+                    <field name="nombre_proyecto"/>
+                    <field name="tipo_trabajo"/>
+                    <field name="fecha_inic_inst"/>
+                    <field name="fecha_fin_inst"/>
+                    <field name="fecha_produccion_inst"/>
+                    <field name="jefe_cuadrilla_inst"/>
+                    <field name="seg_tecnico"/>
+                    <field name="seg_administrativo"/>
+                </tree>
+            </field>
+        </record>
+   <!--  -->
+
+        <record model="ir.actions.act_window" id="action_view_instalacion_reporte4">
+            <field name="name">Reporte Seguimiento Tecnico X Administrativo </field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[]</field>
+            <field name="view_id" ref="view_instalacion_reporte4_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            </field>
+        </record>
+
+
+
+
+
+
+
+<!--*******************************************Reporte Pac enviado X Fecha ************************************************************-->
+        <record id="view_item_reporte6_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="10" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+                    <field name="control_instalaciones_relacionado_cod_sitio"/>
+                    <field name="control_instalaciones_relacionado_nombre_sitio"/>
+                    <field name="name"/>
+                    <field name="n_po"/>
+                    <field name="ud"/>
+                    <field name="precio_unitario"/>
+                    <field name="precio_total"/>
+                    <field name="pac_enviado"/>
+                    <field name="fecha_fac"/>
+                    <field name="facturacion_pac"/>
+                    <field name="facturacion_fac"/>
+                    <field name="control_instalaciones_relacionado"/>
+
+                </tree>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_view_item_reporte6">
+            <field name="name">Reporte Pac </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('fecha_fac','=',False),('facturacion_fac','=','True'),'|',('fecha_fac','=',False),('facturacion_pac','=','True') ]</field>
+            <field name="view_id" ref="view_item_reporte6_tree"/>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create"></p>
+            </field>
+        </record>
+
+
+
+
+
+
+    </data>
+</odoo>

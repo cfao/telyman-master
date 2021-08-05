@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		<record id="Telyman_administrador" model="res.groups">
+	        <field name="name">Telyman Administrador</field>
+        </record>
+
+	    <record id="Telyman_super_Usuario" model="res.groups">
+	        <field name="name">Telyman Super Usuario</field>
+        </record>
+
+	    <record id="Telyman_Editor" model="res.groups">
+	        <field name="name">Telyman Editor</field>
+        </record>
+
+	    <record id="Telyman_Visor" model="res.groups">
+	        <field name="name">Telyman Visor</field>
+        </record>
+
+
+
+
+        <!--    28-11-2018
+
+        http://ingeniosolutions.com.ar/demos/pythagoreanodoo/acusmata/seguridad-basica-permisos-csv-grupo-de-usuarios
+
+
+            1. Administrador
+                    Miguel Torrejoncillo		MIGUEL.T
+                    Greivin Jiménez
+
+            2. Súper Usuario
+                    Kimberly Vargas				KIMBERLY.VARGAS
+
+            3. Editor
+                    Ericka Arce					ERIKA.ARCE
+                    Adrián Escobar				ADRIAN.ESCOBAR
+                    Jessica Gómez
+                    Ismary González
+                    Alexis González
+
+            4. Visor
+                    Alexander Madrigal			ALEXANDER.MADRIGAL
+         -->
+
+
+
+	</data>
+</openerp>

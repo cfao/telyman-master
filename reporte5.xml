@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report
+            id="action_reporte5"
+            model="contrata.item"
+            string="Orden de Compra 5"
+            report_type="qweb-pdf"
+            file="telyman.reporte_orden_compra5"
+            name="telyman.reporte_orden_compra5"
+        />
+    </data>
+</openerp>

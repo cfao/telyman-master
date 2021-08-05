@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<data>
+<template id="reporte_orden_compra4">
+
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="record">
+            <t t-call="report.internal_layout">
+
+                <div class="page">
+
+
+                <div class="header">
+                    <img src='/telyman/static/Imagenes/TelymanLogo.jpg' style="max-height: 45px;"/>
+
+                </div>
+
+                    <div class="oe_structure"/>
+
+                    <div>
+
+                        <table   class="table table-borderless">
+
+                           <thead>
+                           <tr>
+                               <td>
+
+
+                                       <strong>
+                                           <center>
+                                                <h1> <span class="badge badge-secondary">Orden de Compra 4</span></h1>
+                                           </center>
+                                       </strong>
+
+                                       <br/>
+                                       <strong>Cod Proyecto: </strong>
+                                       <span t-if="record.cod_sitio"  scope="row" t-field="record.name" />
+                                       <br/>
+
+                                       <br/>
+                                       <strong>Cod Sitio: </strong>
+                                       <span t-if="record.cod_sitio"  scope="row" t-field="record.cod_sitio" />
+                                       <br/>
+
+                                       <strong>Nombre Sitio: </strong>
+                                       <span t-if="record.nombre_sitio" t-field="record.nombre_sitio" />
+                                       <br/>
+
+                                       <strong>Nombre Proyecto: </strong>
+                                       <span t-if="record.nombre_proyecto" t-field="record.nombre_proyecto" />
+                                       <br/>
+
+
+                                </td>
+
+                           </tr>
+                          </thead>
+
+
+                        </table>
+                    </div>
+
+                    <div>
+                        <!-- ****************************** Contratas ********************************** -->
+                                <strong>
+                                      <h1> <span class="badge badge-secondary">Orden de Compra 2</span></h1>
+                                 </strong>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                                <th data-id="name" class="o_column_sortable">
+                                                    Nombre
+                                                </th>
+
+                                                 <th data-id="contrata_id" class="o_column_sortable">
+                                                    Contratista
+                                                </th>
+
+
+                                                <th data-id="po_contrata" class="o_column_sortable">
+                                                    PO
+                                                </th>
+
+                                                <th data-id="precio_unitario" class="o_column_sortable">
+                                                    Precio
+                                                </th>
+
+                                                <th data-id="ud_contrata" class="o_column_sortable">
+                                                    Und
+                                                </th>
+                                                  <th data-id="precio_total" class="o_column_sortable">
+                                                    Total
+                                                </th>
+
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                            <t t-foreach="record.contrata_ids" t-as="contratas"  string="Contratas">
+                                                    <!--     <span t-field="record.coord_y" />
+                                                <span t-esc="item.funcionLlamada()"  /> -->
+
+
+                                                 <tr>
+                                                    <td><span t-field="contratas.name"  /></td>
+                                                    <td><span t-field="contratas.contrata_id"  /></td>
+                                                    <td><span t-field="contratas.po_contrata"/></td>
+                                                    <td><span t-field="contratas.precio_unitario"/></td>
+                                                    <td><span t-field="contratas.ud_contrata"/></td>
+                                                    <td><span t-field="contratas.precio_total"/></td>
+
+
+
+                                                 </tr>
+                                                <b/>
+                                            </t>
+                                    </tbody>
+
+
+
+                                             <td>
+                                                 <strong>Total:</strong>
+                                                <t t-esc="sum(contratas.precio_total for contratas in record.contrata_ids) " />
+                                             </td>
+   <!---->
+
+
+
+                                </table>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 </div>
+                </t>
+             </t>
+
+        </t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </template>
+
+</data>
+

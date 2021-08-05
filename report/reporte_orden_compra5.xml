@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<data>
+    <template id="reporte_orden_compra5">
+        <t t-call="report.html_container">
+            <t t-call="report.internal_layout">
+
+
+<!--     -->
+                <div class="page">
+
+                <div class="header">
+                    <img src='/telyman/static/Imagenes/TelymanLogo.jpg' style="max-height: 45px;"/>
+
+                </div>
+
+                    <div class="oe_structure"/>
+
+
+                    <div>
+                        <!--TelymanLogo.jpg favicon.ico****************************** Contratas ********************************** -->
+                        <strong>
+                            <h1>
+                                <span class="badge badge-secondary">Orden de Compra 5</span>
+                            </h1>
+                        </strong>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th data-id="telyman_core_id" class="o_column_sortable">
+                                        Cod Proyecto
+                                    </th>
+                                    <th data-id="telyman_core_id" class="o_column_sortable">
+                                        Cod Sitio
+                                    </th>
+                                    <th data-id="telyman_core_id" class="o_column_sortable">
+                                        Nombre Sitio
+                                    </th>
+
+
+                                    <th data-id="telyman_core_id" class="o_column_sortable">
+                                        Nombre Proyecto
+                                    </th>
+
+
+                                    <th data-id="contrata_id" class="o_column_sortable">
+                                        Contratista
+                                    </th>
+
+                                    <th data-id="po_contrata" class="o_column_sortable">
+                                        PO
+                                    </th>
+
+                                    <th data-id="name" class="o_column_sortable">
+                                        Nombre
+                                    </th>
+
+                                    <th data-id="precio_unitario" class="o_column_sortable">
+                                        Precio
+                                    </th>
+
+                                    <th data-id="ud_contrata" class="o_column_sortable">
+                                        Und
+                                    </th>
+                                    <th data-id="precio_total" class="o_column_sortable">
+                                        Total
+                                    </th>
+                                     <th data-id="contratas_observaciones" class="o_column_sortable">
+                                        Observaciones
+                                    </th>
+
+
+
+
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+
+                                <t t-foreach="docs" t-as="contratas">
+                                    <tr>
+                                        <td>
+                                            <span t-field="contratas.telyman_core_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.telyman_core_id.cod_sitio"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.telyman_core_id.nombre_sitio"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="contratas.telyman_core_id.nombre_proyecto"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="contratas.contrata_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.po_contrata"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.precio_unitario"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.ud_contrata"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="contratas.precio_total"/>
+                                        </td>
+                                          <td>
+                                            <span t-field="contratas.contratas_observaciones"/>
+                                        </td>
+
+
+
+
+                                    </tr>
+                                    <b/>
+                                </t>
+                            </tbody>
+
+
+                            <td>
+                                <strong>Total:</strong>
+                                <t t-esc="sum(contratas.precio_total for contratas in docs) "/>
+                            </td>
+                            <!--  -->
+
+                        </table>
+                    </div>
+
+
+                </div>
+            </t>
+        </t>
+
+
+    </template>
+
+</data>
+
+
+
+
+
+
+
+

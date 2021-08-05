@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report
+            id="action_reporte1"
+            model="control_instalaciones.control_instalaciones"
+            string="Control de Instalaciones"
+            report_type="qweb-pdf"
+            file="telyman.reporte1_lista"
+            name="telyman.reporte1_lista"
+        />
+    </data>
+</openerp>
+

@@ -1,0 +1,10 @@
+id,sequence,name
+seguimiento01,1,Sin PO
+seguimiento02,2,PO recibida
+seguimiento03,3,PO anulada
+seguimiento04,4,Pte Acceptance
+seguimiento05,5,Pendiente de acceptance
+seguimiento06,6,Acceptance entregado
+seguimiento07,7,Acceptance subido
+seguimiento08,8,Facturado PAC
+seguimiento09,9,Facturado FAC

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<data>
+    <template id="reporte_cotizaciones_2">
+       <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="record">
+            <t t-call="report.internal_layout">
+
+                <div class="page">
+
+
+                <div class="header">
+                    <img src='/telyman/static/Imagenes/TelymanLogo.jpg' style="max-height: 45px;"/>
+
+                </div>
+
+                    <div class="oe_structure"/>
+
+                    <div>
+
+                        <table   class="table table-borderless">
+
+                           <thead>
+                           <tr>
+                               <td>
+
+
+                                       <strong>
+                                           <center>
+                                                <h1> <span class="badge badge-secondary">Cotización 2</span></h1>
+                                           </center>
+                                       </strong>
+
+                                       <br/>
+                                       <strong>Cod Cotización: </strong>
+                                       <span t-if="record.codigo"  scope="row" t-field="record.codigo" />
+                                       <br/>
+
+                                       <br/>
+                                       <strong>Cod Sitio: </strong>
+                                       <span t-if="record.cotizacion_cod_sitio"  scope="row" t-field="record.cotizacion_cod_sitio" />
+                                       <br/>
+
+                                       <strong>Cliente: </strong>
+                                       <span t-if="record.cotizacion_cliente" t-field="record.cotizacion_cliente" />
+                                       <br/>
+
+                                       <strong>Fecha cotización: </strong>
+                                       <span t-if="record.cotizacion_fecha_emision" t-field="record.cotizacion_fecha_emision" />
+                                       <br/>
+
+
+                                </td>
+
+                           </tr>
+                          </thead>
+
+
+                        </table>
+                    </div>
+
+                    <div>
+
+
+                        <table class="table">
+                                <tbody>
+
+
+                                       <t t-foreach="request.env['producto.producto'].search([('cotizacion_relacionado_id', '=', '002079')])" t-as="obj">
+                                            <tr>
+                                                     <td>
+                                                        <span t-field="obj.producto_name"/>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-field="obj.producto_ud"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="obj.producto_precio_unitario"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="obj.producto_precio_total"/>
+                                                    </td>
+
+                                            </tr>
+
+                                        </t>
+                                </tbody>
+
+<!--
+                             <td>
+                             <strong>Total:</strong>
+                                <t t-esc="sum(obj.producto_precio_total for obj in docs) "/>
+                            </td> -->
+
+                        </table>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 </div>
+                </t>
+             </t>
+
+        </t>
+
+
+
+
+    </template>
+
+</data>
+
+
+
+
+
+
+
+

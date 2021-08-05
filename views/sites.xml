@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sites_telyman_form_view" model="ir.ui.view">
+        <field name="name">sites.telyman.form.view</field>
+        <field name="model">sites.telyman</field>
+        <field name="arch" type="xml">
+            <form string="Sitios">
+                 <div class="oe_title">
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                 </div>
+                <group col="4">
+                    <field name="cod_sitio"/>
+                    <field name="site_client"/>
+                    <field name="ubicacion_Gam_rural"/>
+                    <field name="ubicacion"/>
+                    <field name="provincia"/>
+                    <field name="coord_x"/>
+                    <field name="coord_y"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="sites_telyman_tree_view" model="ir.ui.view">
+        <field name="name">sites.telyman.tree.view</field>
+        <field name="model">sites.telyman</field>
+        <field name="arch" type="xml">
+            <tree string="Sitios">
+                <field name="cod_sitio"/>
+                <field name="name"/>
+                <field name="site_client"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_sites_telyman" model="ir.actions.act_window">
+        <field name="name">Sitios</field>
+        <field name="res_model">sites.telyman</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

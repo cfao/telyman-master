@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_proyectos_padre" name="Proyectos"/>
+        <menuitem id="menu_instalaciones"  name="Instalaciones" parent="menu_proyectos_padre"  sequence="1"/>
+        <menuitem id="instalaciones1"  name="Instalaciones" parent="menu_instalaciones" action="action_view_control_instalaciones" />
+        <menuitem id="instalaciones2"  name="Pre Instalaciones" parent="menu_instalaciones" action="action_view_preInstalacion" />
+        <menuitem id="instalaciones3"  name="Alertas Instalaciones" parent="menu_instalaciones" action="action_view_control_instalaciones_Alerta" />
+        <menuitem id="instalaciones4"  name="Cotizaciones" parent="menu_instalaciones" action="action_view_cotizaciones" />
+        <menuitem id="instalaciones5"  name="Productos de Cotizaciones" parent="menu_instalaciones" action="action_view_producto" />
+        <menuitem id="menu_relacionados" name="Relacionados"     parent="menu_proyectos_padre"  sequence="2"/>
+        <menuitem id="menu_instalaciones10" name="Items"            parent="menu_relacionados" action="action_view_item" />
+        <menuitem id="menu_instalaciones11" name="Contratas"        parent="menu_relacionados"   action="action_view_contratas" />
+        <menuitem id="menu_instalaciones12" name="Historial Proy"        parent="menu_relacionados"   action="action_view_historial_instalacion" />
+        <menuitem id="menu_configuracion"  name="Configuración"         parent="menu_proyectos_padre"  sequence="3"/>
+        <menuitem id="menu_instalaciones20"  name="Tipo Trabajo"          parent="menu_configuracion" action="action_view_tipo_trabajo" />
+        <menuitem id="menu_instalaciones21"  name="Contratista"           parent="menu_relacionados" action="action_view_contratista" />
+        <menuitem id="menu_instalaciones22"  name="Cliente"               parent="menu_relacionados" action="action_view_cliente" />
+        <menuitem id="menu_instalaciones23"  name="Seguimiento Administrativo"    parent="menu_configuracion" action="action_view_tipo_seguimiento_administrativo" />
+        <menuitem id="menu_instalaciones24"  name="Seguimiento Tecnico"           parent="menu_configuracion" action="action_view_tipo_seguimiento_tecnico" />
+        <menuitem id="menu_resports"  name="Rpt"  parent="menu_proyectos_padre"  sequence="4"/>
+        <menuitem id="menu_instalaciones41"  name="Rpt FAC Enviado X Fecha"           parent="menu_resports" action="action_view_item_reporte4" />
+        <menuitem id="menu_instalaciones42"  name="Rpt PAC Enviado X Fecha"           parent="menu_resports" action="action_view_item_reporte5" />
+        <menuitem id="menu_instalaciones43"  name="Rpt instalaciones"                 parent="menu_resports" action="action_view_instalacion_reporte1" />
+        <menuitem id="menu_instalaciones44"  name="Rpt Estado PO X Fecha"             parent="menu_resports" action="action_view_item_reporte3" />
+        <menuitem id="menu_instalaciones45"  name="Rpt Seguimiento PTE Factura"       parent="menu_resports" action="action_view_item_reporte1" />
+        <menuitem id="menu_instalaciones46"  name="Rpt PO Facturadas"                 parent="menu_resports" action="action_view_item_reporte2" />
+        <menuitem id="menu_instalaciones47"  name="Rpt Instalaciones Documentación"   parent="menu_resports" action="action_view_control_instalaciones_Reporte1" />
+        <menuitem id="menu_instalaciones48"  name="Rpt Contratas aceptadas"           parent="menu_resports" action="action_view_contratas_reporte1" />
+        <menuitem id="menu_instalaciones49"  name="Rpt Seguimiento Técnico"                 parent="menu_resports" action="action_view_instalacion_reporte2" />
+        <menuitem id="menu_instalaciones50"  name="Rpt Seguimiento Administrativo"          parent="menu_resports" action="action_view_instalacion_reporte3" />
+        <menuitem id="menu_instalaciones51"  name="Rpt Seguimiento Tecnico y Administrativo" parent="menu_resports" action="action_view_instalacion_reporte4" />
+        <menuitem id="menu_instalaciones52"  name="Rpt Items NO Facturados" parent="menu_resports" action="action_view_item_reporte6" />
+        <menuitem id="menu_proyectos_padre2"      name="Cotizaciones"/>
+
+        <menuitem id="menu_project_telyman" name="Proyectos" parent="menu_relacionados" sequence="1" action="action_project_telyman"/>
+        <menuitem id="menu_sites_telyman" name="Sitios" parent="menu_relacionados" sequence="2" action="action_sites_telyman"/>
+        <menuitem id="instalaciones_telyman"  name="Instalaciones Nuevo" parent="menu_instalaciones" action="action_view_telyman_instalaciones" />
+        <menuitem id="item_telyman" name="Items Nuevo" parent="menu_relacionados" action="action_view_telyman_item" />
+        <menuitem id="menu_contractors_telyman" name="Contratas Nuevo" parent="menu_relacionados"   action="action_view_contratas_telyman" />
+        <menuitem id="menu_historial_telyman" name="Historial Proy"  parent="menu_relacionados"   action="action_view_historial_telyman" />
+
+    </data>
+</odoo>

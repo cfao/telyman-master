@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="vista_grafico_trabajos" model="ir.ui.view">
+            <field name="name">grafico_trabajos</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="arch" type="xml">
+                <graph type="pivot">
+                    <field name="operador" type="row" />
+                    <field name="provincia" type="col" />
+                </graph>
+            </field>
+        </record>
+
+
+
+
+
+
+    </data>
+</odoo>

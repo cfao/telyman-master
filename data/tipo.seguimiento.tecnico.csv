@@ -1,0 +1,10 @@
+id,sequence,name
+seguimiento_tecnico01,1,Pte comienzo
+seguimiento_tecnico02,2,Inst. Planificada
+seguimiento_tecnico03,3,Inst. Iniciada
+seguimiento_tecnico04,4,Inst. paralizada
+seguimiento_tecnico05,5,Inst. Cancelada
+seguimiento_tecnico06,6,Inst. Finalizada
+seguimiento_tecnico07,7,Pte documentación
+seguimiento_tecnico08,8,Docum. entregada
+seguimiento_tecnico09,9,Docum. aprobada

@@ -1,0 +1,1337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="paperformat_euro_copy" model="report.paperformat">
+            <field name="name">European A4 Horizontal</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+<!--   ****************************************  Lista Control Instalaciones ************************************************     -->
+        <record id="view_control_instalaciones_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Control de Instalaciones"      >
+ <!--   -->
+                    <button string="Act" type="object" name="generar_linea" class="oe_highlight"/>
+
+
+
+                    <field name="name" string="Cod Proy"/>
+                    <field name="cod_sitio" string="Cod Sitio"/>
+                    <field name="nombre_sitio" string="Nombre Sitio"/>
+                    <field name="tipo_trabajo" string="Tipo Trabajo"/>
+                    <field name="nombre_proyecto" string="Nombre Proyecto"/>
+                    <field name="cliente"/>
+                    <field name="operador" string="Operador"/>
+                    <field name="contrata_inst" string="Contrata"/>
+                    <field name="fecha_inic_inst" string="Fecha Inicio Inst"/>
+                    <field name="fecha_fin_inst" string="Fecha Fin Inst"/>
+                    <field name="items_precio_total_instalacion" string="Valor Total"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+<!--   **********  formulario   Control Instalaciones  ************************************************   -->
+        <record id="view_control_instalaciones_form" model="ir.ui.view">
+            <field name="name">Instalaciones.form</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <form string="Control de Instalaciones">
+                    <sheet>
+                        <group>
+                          <!--  cod_sitio   nombre_sitio      operador  tipo_trabajo     ubicacion   provincia    nombre_proyecto    coord_x      coord_y   -->
+                                <group name="codes1" string="Datos Generales">
+                                    <field name="name"/>
+                                    <field name="cod_sitio"/>
+                                    <field name="nombre_sitio"/>
+                                    <field name="operador"/>
+                                    <field name="tipo_trabajo"/>
+                                    <field name="ubicacion_Gam_rural"/>
+                                    <field name="ubicacion"/>
+                                    <field name="provincia"/>
+                                    <field name="nombre_proyecto"/>
+                                    <field name="coord_x"/>
+                                    <field name="coord_y"/>
+                                    <field name="proyecto_id"/>
+                                </group>
+
+                          <!--Campos contrata_inst  jefe_cuadrilla_inst  sup_telyman_inst  fecha_planific_inst   fecha_inic_inst  fecha_fin_inst
+                                                                 fecha_produccion_inst      quickbook   -->
+                                <group name="codes" string="Datos Instalador">
+                                        <field name="contrata_inst" domain="[('contrata_inst', '=', True)]"/>
+                                        <field name="jefe_cuadrilla_inst"  domain="[('jefe_cuadrilla', '=', True)]"/>
+                                        <field name="sup_telyman_inst"  domain="[('sup_telyman', '=', True)]"/>
+                                        <field name="jefe_proyecto" domain="[('jefe_proyecto', '=', True)]"/>
+                                        <field name="fecha_planific_inst"/>
+                                        <field name="fecha_inic_inst"/>
+                                        <field name="fecha_fin_inst"/>
+
+                                        <button name="modificar_fecha" type="object" string="Modificar fecha Produccion" groups="__export__.res_groups_69
+"/>
+                                        <button name="bloquear_fecha" type="object" string="Bloquear fecha Produccion" groups="__export__.res_groups_69"/>
+
+                                        <field name="modificar_fecha_proyecto" invisible="1"/>
+
+
+                                        <field name="fecha_produccion_inst" attrs="{'readonly': [('modificar_fecha_proyecto', '=', False)]}"/>
+                                        <field name="quickbook"/>
+                                </group>
+
+                        </group>
+                        <group>
+
+                                <group name="codes" string="Datos Cliente">
+                                        <field name="cliente"/>
+                                        <field name="supervisor_cliente" domain="[('supervisor_cliente', '=', True)]"/>
+                                        <field name="jefe_proyecto_cliente" domain="[('jefe_proyecto_cliente', '=', True)]"/>
+                                </group>
+                                <group name="codes" string="Seguimiento">
+                                    <field name="seg_administrativo"/>
+                                    <field name="seg_tecnico"/>
+                                    <field name="currency_id"/>
+                                    <field name="tipo_cambio" string="Tipo Cambio $"/>
+                                </group>
+
+                        </group>
+<!-- -->
+         <!--   ***** TABS   (Item  |  Documentacion  |  Check List   |   Contratas)   *************************     -->
+                        <notebook colspan="4">
+
+<!--   *****************************  Item    ************************************************     -->
+                            <!-- <field name="carga_actualizado"/> -->
+                            <page name="control_instalaciones_item" string="Item">
+
+                                <group col="4" colspan="4"  name="control_instalaciones_item">
+                                        <tree string="Items Relacionados">
+                                            <field name="items_relacionados" string="Items" editable="bottom">
+                                                <tree editable="bottom">
+
+
+                                                    <field name="item_utilizado_contratas"/>
+
+                                                    <field name="name" domain="[('categ_id','=', parent.proyecto_id)]"/>
+                                                    <field name="item_observaciones"/>
+
+                                                    <field name="state"/>
+                                                    <field name="fecha_estado_po"/>
+                                                    <field name="n_po"/>
+                                                    <field name="ud"/>
+                                                    <field name="precio_unitario"/>
+
+                                                    <field name="precio_total" sum="Total"/>
+
+                                                    <field name="precio_unitario_dollar" />
+                                                    <field name="precio_total_dollar"  sum="Total"   />
+
+                                                    <field name="pac_enviado"/>
+                                                    <field name="fac_enviado"/>
+                                                    <field name="fecha_pac"/>
+                                                    <field name="facturacion_pac"/>
+                                                    <field name="fecha_fac"/>
+                                                    <field name="facturacion_fac"/>
+                                                </tree>
+                                            </field>
+                                        </tree>
+                                </group>
+                            </page>
+
+
+                 <!--   *****************************  Documentacion   ***************************************** -->
+
+                            <page name="control_instalaciones_documentacion"  string="Documentaciòn">
+                                <group col="4" colspan="4"  name="control_instalaciones_documentacion">
+                                    <table style="width: 100%;">
+                                        <thead>
+                                                <tr>
+                                                    <!--   <td> </td>
+                                                    <td>   Recibidos/ Realizados    </td>
+                                                    <td>   Aprobado                 </td>
+                                                    <td>   Enviado Clientes         </td>
+                                                    <td>   Aprobado                 </td>
+                                                    <td>   Observaciones            </td>   -->
+
+                                                    <th></th>
+                                                    <th class="text-left">Recibidos/ Realizados</th>
+                                                    <th class="text-left">Aprobado</th>
+                                                    <th class="text-center">Enviado Clientes</th>
+                                                    <th class="text-left">Aprobado</th>
+                                                    <th class="text-center">Observaciones</th>
+                                                </tr>
+                                         </thead>
+                                        <tr>
+                                            <td> <field name="planos_docu" />    Planos             </td>
+                                            <td> <field name="planos_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="planos_realizado_aprob_docu" />       </td>
+                                            <td> <field name="planos_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="planos_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="planos_observacion_docu" />           </td>
+                                        </tr>
+
+                <!-- Campos    foto_docu    foto_fecha_recibido_docu   foto_realizado_aprob_docu
+                             foto_fecha_envio_cliente_docu    foto_envio_cliente_aprobado_docu    foto_observacion_docu -->
+
+                                        <tr>
+                                            <td> <field name="foto_docu" />    Fotografia         </td>
+                                            <td> <field name="foto_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="foto_realizado_aprob_docu" />       </td>
+                                            <td> <field name="foto_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="foto_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="planos_observacion_docu" />         </td>
+                                        </tr>
+
+                <!-- Campos  AS_build_docu   AS_build_fecha_recibido_docu   AS_build_realizado_aprob_docu
+                            AS_build_fecha_envio_cliente_docu   AS_build_envio_cliente_aprobado_docu   AS_build_observacion_docu  -->
+
+
+                                        <tr>
+                                            <td> <field name="AS_build_docu" />     AS Build          </td>
+                                            <td> <field name="AS_build_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="AS_build_realizado_aprob_docu" />       </td>
+                                            <td> <field name="AS_build_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="AS_build_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="AS_build_observacion_docu" />             </td>
+                                        </tr>
+
+
+                     <!-- Campos    ATP_docu    ATP_fecha_recibido_docu   ATP_realizado_aprob_docu
+                            ATP_fecha_envio_cliente_docu   ATP_envio_cliente_aprobado_docu   ATP_observacion_docu  -->
+
+                                         <tr>
+                                            <td> <field name="ATP_docu" />    APT/Check List     </td>
+                                            <td> <field name="ATP_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="ATP_realizado_aprob_docu" />       </td>
+                                            <td> <field name="ATP_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="ATP_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="ATP_observacion_docu" />          </td>
+                                        </tr>
+
+
+                     <!-- Campos  EHS_docu    EHS_fecha_recibido_docu   EHS_realizado_aprob_docu
+                             EHS_fecha_envio_cliente_docu    EHS_envio_cliente_aprobado_docu    EHS_observacion_docu  -->
+
+                                         <tr>
+                                            <td> <field name="EHS_docu" />      EHS                 </td>
+                                            <td> <field name="EHS_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="EHS_realizado_aprob_docu" />       </td>
+                                            <td> <field name="EHS_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="EHS_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="EHS_observacion_docu" />           </td>
+                                        </tr>
+
+                                    </table>
+                                </group>
+                            </page>
+
+                <!--   *****************************  Check List    *******************************************     -->
+                            <!---->
+
+                            <page name="control_instalaciones_check_list"   string="Check List">
+                                <group col="4" colspan="4"  name="control_instalaciones_check_list">
+                                 <table>
+                                     <tr>
+                                         <td> <field name="fecha_chck" />     Fecha              </td>
+                                         <td> <field name="estado_chck" />      Estado                </td>
+                                     </tr>
+                                     <tr>
+                                         <td> <field name="realizado_chck" />   Realizado Por             </td>
+                                         <td> <field name="fecha_enviado_chck" />     Fecha Envío           </td>
+                                     </tr>
+                                 </table>
+                                </group>
+                                <td> <field name="chck_observaciones" />     Observaciones                  </td>
+                            </page>
+
+
+                 <!--   *****************************  Contratas Tab  *******************************************     -->
+                            <page name="control_instalaciones_contratas"  string="Contratas">
+                                <field name="contrata_ids">
+                                    <tree editable="bottom">
+                                      <!--field name="codigo"/-->
+                                      <field name="carga_actualizadocontrata"/>
+                                      <field name="name"/>
+                                      <field name="contrata_id"  domain="[('contrata', '=', True)]"/>
+                                      <field name="po_contrata"/>
+                                      <field name="ud_contrata"/>
+                                      <field name="precio_unitario"/>
+                                      <field name="precio_total"  sum="Total"/>
+                                      <field name="aceptado"/>
+                                      <field name="fecha_fact_contrata"/>
+                                      <field name="num_contrato"/>
+                                      <field name="fecha_pago_contrata"/>
+                                      <field name="contratas_observaciones"/>
+                                    </tree>
+                                </field>
+
+                                   <!--     <group col="4" colspan="4"  name="orden_compra" aling="left"></group>-->
+                                    <lable>Orden de Compra :</lable>    <field name="cliente_orden_compra"/>
+                           </page>
+
+                           <page name="control_instalaciones_check_list"   string="Calculos">
+                                <group col="4" colspan="4"  name="control_instalaciones_check_list">
+                                 <table>
+                                        <field name="items_relacionados_precio_total_aprobado" string="Item Total Aprobado"/>
+                                        <field name="items_relacionados_precio_total_solicitado" string="Item Solicitado"/>
+                                        <field name="items_relacionados_pac_facturado" string="PAC Facturado"/>
+                                        <field name="items_relacionados_fac_facturado" string="FAC Facturado"/>
+                                        <field name="items_relacionados_pac_fecha" string="PAC Fecha"/>
+                                        <field name="items_relacionados_fac_fecha" string="FAC Fecha"/>
+                                        <field name="fecha_alerta1" string="Alerta"/>
+                                        <field name="alerta1" string="Alertar"/>
+                                        <field name="contador_Alerta" string="Contador Alerta"/>
+                                     <!--  <field name="alerta_fija" string="Alerta Fija"/>   -->
+                                 </table>
+                                </group>
+
+                              <group>
+                                   <field name="alerta_observaciones" string="Observaciones Alerta" style="height:50%;width:100%;"/>
+                              </group>
+                    <group>
+                         <td> <field name="chck_observaciones"      string="Observaciones " style="height:50%;width:100%;"/>                </td>
+                    </group>
+
+                           </page>
+
+  <!--   ***************************** Historial Tab  *******************************************  invisible="1"   -->
+                           <page name="control_instalaciones_historial" string="Historial" >
+
+                                <group col="4" colspan="4"  name="control_instalaciones_historial">
+                                        <tree string="Historial">
+                                            <field name="historial_relacionado" string="Historial" editable="bottom">
+                                                <tree editable="bottom">
+
+                                                    <field name="historial_fecha"/>
+                                                     <field name="historial_descripcion"/>
+                                                    <field name="historial_PO"/>
+                                                    <field name="historial_observaciones"/>
+                                                    <field name="historial_fecha_entrega_materiales"/>
+                                                    <field name="historial_materiales"/>
+                                                    <field name="historial_DU"/>
+                                                    <field name="historial_porcentaje_avance"/>
+                                                    <field name="tipo_tecnologia"/>
+                                                    <field name="tipo_partner"/>
+
+
+                                                </tree>
+                                            </field>
+                                        </tree>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="Observaciones">
+                                    <field nolabel="1" name="item_observaciones" class="oe_inline" placeholder="Puede introducir comentarios" />
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+<!--   ****************************************  BUSQUEDA Control de Instalaciones  *************************************     -->
+
+      <!-- -->  <record id="control_instalaciones1_filter" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones.select</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda de Proyectos">
+                    <field name="name" string="Proyectos" filter_domain="['|','|', '|','|', '|', ('name','ilike',self),('cod_sitio','ilike',self),('nombre_sitio','ilike',self),('cliente','ilike',self),('nombre_proyecto','ilike', self),('operador','ilike',self)]"/>
+
+                   <group expand="0" string="Group By">
+                        <filter name="group_by_cliente" string="Cliente" context="{'group_by':'cliente'}"/>
+                        <filter name="group_by_operador" string="Operador" context="{'group_by':'operador'}"/>
+                        <filter name="group_by_contrata" string="Contrata" context="{'group_by':'contrata_inst'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+
+<!--   *****************************************************************************     -->
+
+        <!--   ****************************************  Control de Instalaciones  *************************************     -->
+        <record model="ir.actions.act_window" id="action_view_control_instalaciones">
+            <field name="name">Instalaciones</field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo proyecto</p>
+            </field>
+        </record>
+
+<!--*******************************************  Historial Instalacion  *****************************************************************-->
+<!--******************************************* Historial Instalacion  ************************************************************-->
+        <record id="view_historial_proyecto_tree" model="ir.ui.view">
+            <field name="name">historial.instalacion.tree</field>
+            <field name="model">historial.instalacion</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+
+                     <field name="historial_fecha"/>
+                     <field name="historial_descripcion"/>
+                    <field name="historial_DU"/>
+
+                     <field name="historial_porcentaje_avance"/>
+                     <field name="tipo_tecnologia"/>
+                     <field name="tipo_partner"/>
+                    <field name="historial_fecha_entrega_materiales"/>
+
+                    <field name="historial_proyecto_asociado"/>
+                     <field name="historial_fecha_planific_inst"/>
+                    <field name="historial_fecha_inic_inst"/>
+                    <field name="historial_fecha_fin_inst"/>
+                </tree>
+            </field>
+        </record>
+
+ <!--   **********  historial instalacion ***********************************   -->
+        <record id="view_historial_instalacion_form" model="ir.ui.view">
+            <field name="name">historial.instalacion.form</field>
+            <field name="model">historial.instalacion</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Historial Proyecto">
+                    <sheet>
+                        <group>
+                              <group name="codes" string="Datos Historial">
+                                 <field name="historial_fecha"/>
+                                 <field name="historial_descripcion"/>
+                                 <field name="historial_fecha_entrega_materiales"/>
+                                 <field name="historial_materiales"/>
+                                  <field name="historial_DU"/>
+                                 <field name="historial_porcentaje_avance"/>
+                                 <field name="tipo_tecnologia"/>
+                                 <field name="tipo_partner"/>
+                                 <field name="historial_PO"/>
+                               </group>
+                                <group name="codes" string="Datos Proyecto Relacionado">
+                                    <field name="historial_proyecto_asociado"/>
+                                    <field name="historial_cod_sitio"/>
+                                    <field name="historial_nombre_sitio"/>
+                                    <field name="historial_fecha_planific_inst"/>
+                                    <field name="historial_fecha_inic_inst"/>
+                                    <field name="historial_fecha_fin_inst"/>
+                                </group>
+                        </group>
+              <group>
+                   <field name="historial_observaciones" style="height:50%;width:100%;"/>
+              </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_historial_instalacion">
+            <field name="name">Historial Proyectos </field>
+            <field name="res_model">historial.instalacion</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Historial</p>
+            </field>
+        </record>
+ <!--   ****************************************************************************************     -->
+
+<!--   **************************************** Alerta Instalaciones************************************************     -->
+        <record id="view_control_instalaciones_Alerta_tree" model="ir.ui.view">
+            <field name="name">control_instalaciones.control_instalaciones_Alerta.tree</field>
+            <field name="model">control_instalaciones.control_instalaciones</field>
+            <field name="priority" eval="15" />
+            <field name="arch" type="xml">
+                <tree string="Alerta Instalaciones">
+                    <field name="name" string="Cod Proy"/>
+                    <field name="cod_sitio" string="Cod Sitio"/>
+                    <field name="nombre_sitio" string="Nombre Sitio"/>
+                    <field name="nombre_proyecto" string="Nombre Proyecto"/>
+                    <field name="operador" string="Operador"/>
+                     <field name="fecha_inic_inst" string="Fecha Inicio"/>
+                    <field name="fecha_fin_inst" string="Fecha Finalización"/>
+                    <field name="contador_Alerta" string="Contador Alerta"/>
+                    <field name="ubicacion_Gam_rural" string="Ubicación"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_control_instalaciones_Alerta">
+            <field name="name">Alerta Instalaciones </field>
+            <field name="res_model">control_instalaciones.control_instalaciones</field>
+            <field name="view_mode">tree</field>
+            <field name="domain">[('alerta1', '=', 'True')]</field>
+            <field name="view_id" ref="view_control_instalaciones_Alerta_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Alerta Instalación</p>
+            </field>
+        </record>
+
+    <!--   ****************************************  Lista Pre Instalacion ************************************************     -->
+        <record id="view_preInstalacion_tree" model="ir.ui.view">
+            <field name="name">pre.instalacion.tree</field>
+            <field name="model">pre.instalacion</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Pre Instalación">
+
+                    <!--
+                    <button string="Act" type="object" name="crear_cita_calendario" class="oe_highlight"/>-->
+                     <field name="preInstal_calendarizado" />
+                     <field name="preInstal_instalacion_creada" />
+
+                     <field name="preInstal_cod_sitio" />
+                     <field name="preInstal_nombre_sitio" />
+                     <field name="preInstal_provincia" />
+                     <field name="preInstal_ubicacion_Gam_rural" />
+                     <field name="preInstal_descripcion_trabajo" />
+                     <field name="preInstal_fecha_planificacion" />
+                     <field name="preInstal_fecha_planificacion_final" />
+
+                     <field name="preInstal_cliente" />
+                     <field name="preInstal_status_sitio" />
+                     <field name="preInstal_observaciones" />
+
+
+                </tree>
+            </field>
+        </record>
+
+
+<!--   **********  formulario  Pre Instalacion   *********************************** -->
+        <record id="view_preInstalacion_form" model="ir.ui.view">
+            <field name="name">pre.instalacion.form</field>
+            <field name="model">pre.instalacion</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Pre Instalación">
+                    <sheet>
+                        <div class="oe_title">
+                             <table>
+                                  <tr>
+                                      <td>
+                                          <group>
+                                             <field name="preInstal_cod_sitio" />
+                                             <field name="preInstal_nombre_sitio" />
+                                             <field name="preInstal_provincia" />
+                                             <field name="preInstal_ubicacion_Gam_rural" />
+                                             <field name="preInstal_descripcion_trabajo" />
+                                             <field name="preInstal_fecha_planificacion" />
+                                             <field name="preInstal_fecha_planificacion_final" />
+                                             <field name="preInstal_cliente_Solicitante" />
+                                             <field name="preInstal_cliente" />
+                                             <field name="preInstal_jefe_cuadrilla_responsable" />
+                                             <field name="preInstal_jefe_proyecto" domain="[('jefe_proyecto', '=', True)]"/>
+                                             <field name="preInstal_status_sitio" />
+                                             <field name="preInstal_observaciones" />
+
+                                          </group>
+                                         </td>
+
+                                        <td>
+
+                                          <group>
+                                         <!---->
+                                             <field name="preInstal_operador" />
+                                             <field name="preInstal_tipo_trabajo" />
+                                             <field name="preInstal_nombre_proyecto" />
+
+
+
+                                          </group>
+                                        </td>
+
+
+
+                                  </tr>
+
+                                  <tr>
+                                      <td>
+                                          <group>
+                                                <field name="preInstal_calendarizado" />
+                                                <button string="Agregar al Calendario" type="object" name="crear_cita_calendario" class="oe_highlight"/>
+                                          </group>
+                                        </td>
+
+                                      <td>
+                                           <group>
+                                                <field name="preInstal_instalacion_creada" />
+                                                <button string="Instalacion" type="object" name="crear_instalacion" class="oe_highlight"/>
+
+                                            </group>
+                                      </td>
+                                  </tr>
+                             </table>
+
+
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+
+<!--   ****************************************  Pre Instalacion    ************************************************     -->
+
+        <!-- -->  <record id="control_preinstalaciones1_filter" model="ir.ui.view">
+            <field name="name">pre.instalacion.select</field>
+            <field name="model">pre.instalacion</field>
+            <field name="arch" type="xml">
+                <search string="Pre Instalaciones">
+                    <field name="preInstal_cod_sitio" string="PreInstalaciones" filter_domain="['|','|',  ('preInstal_fecha_planificacion','ilike',self),('preInstal_cod_sitio','ilike',self),('preInstal_status_sitio','ilike',self)]"/>
+
+                   <group expand="0" string="Group By">
+                        <filter name="group_by_cliente" string="Fecha Planificación" context="{'group_by':'preInstal_fecha_planificacion'}"/>
+                        <filter name="group_by_operador" string="Estado" context="{'group_by':'preInstal_status_sitio'}"/>
+                        <filter name="group_by_contrata" string="Cod Sitio" context="{'group_by':'preInstal_cod_sitio'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+<!--   ****************************************  Pre Instalacion    ************************************************     -->
+        <record model="ir.actions.act_window" id="action_view_preInstalacion">
+            <field name="name">preInstalacion</field>
+            <field name="res_model">pre.instalacion</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo Pre Proyecto</p>
+            </field>
+        </record>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+ <!--   ****************************************  Lista Operadora ************************************************     -->
+        <record id="view_operadora_tree" model="ir.ui.view">
+            <field name="name">operadora.operadora.tree</field>
+            <field name="model">operadora.operadora</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Control de Instalaciones">
+                    <field name="operadora_cod" />
+                    <field name="operadora_nombre" />
+                    <field name="operadora_descripcion" />
+                </tree>
+
+            </field>
+        </record>
+
+<!--   **********  formulario  operadora  *********************************** -->
+        <record id="view_operadora_form" model="ir.ui.view">
+            <field name="name">operadora.operadora.form</field>
+            <field name="model">operadora.operadora</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Operadora">
+                    <sheet>
+                        <div class="oe_title">
+                             <table>
+                                  <tr>
+                                      <td>
+                                          <group>
+                                             <field name="operadora_cod"/>
+                                             <field name="operadora_nombre"/>
+                                             <field name="operadora_descripcion"/>
+                                              <field name="name" />
+                                          </group>
+                                        </td>
+                                  </tr>
+                             </table>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+<!--   ****************************************  Operadora   ************************************************     -->
+        <record model="ir.actions.act_window" id="action_view_operadora">
+            <field name="name">Operadora</field>
+            <field name="res_model">operadora.operadora</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo operador</p>
+            </field>
+        </record>
+
+<!--*******************************************   Tipo de Trabajo  **********************************************-->
+ <!--******************************************* Lista  Tipo de Trabajo  **********************************************-->
+        <record id="view_tipo_trabajo_tree" model="ir.ui.view">
+            <field name="name">tipo_trabajo.tipo_trabajo.tree</field>
+            <field name="model">tipo_trabajo.tipo_trabajo</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Tipo de Trabajo">
+                        <!--**************************** Campos:  name    trabajo_descripcion   ************************* -->
+                    <field name="name"  />
+                    <field name="trabajo_descripcion" />
+                </tree>
+            </field>
+        </record>
+
+ <!--   ********************************************  formulario  Tipo Trabajo  *****************************************   -->
+        <record id="view_tipo_trabajo_form" model="ir.ui.view">
+            <field name="name">tipo_trabajo.tipo_trabajo.form</field>
+            <field name="model">tipo_trabajo.tipo_trabajo</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Tipo de Trabajo">
+                    <sheet>
+                        <div class="oe_title">
+                             <table>
+                                  <tr>
+                                      <td>
+                                          <group>
+                                             <field name="name"/>
+                                             <field name="trabajo_descripcion"/>
+                                          </group>
+                                        </td>
+                                  </tr>
+                             </table>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+ <!--   ****************************************  Tipo trabajo Accion  ************************************************ -->
+        <record model="ir.actions.act_window" id="action_view_tipo_trabajo">
+            <field name="name">Tipo Trabajo </field>
+            <field name="res_model">tipo_trabajo.tipo_trabajo</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo trabajo</p>
+            </field>
+        </record>
+ <!--   ************************************************************************************* -->
+
+
+
+<!--*******************************************   Item  *****************************************************************-->
+<!--******************************************* Lista  Item  ************************************************************-->
+        <record id="view_item_tree" model="ir.ui.view">
+            <field name="name">item.item.tree</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Item">
+ <!--
+                    <button string="Act" type="object" name="generar_precio" class="oe_highlight"/>
+                    <field name="write_date" string="Ultima modificacion"/>
+                    <field name="carga_actualizado"/>
+    -->
+
+                     <field name="name"/>
+                    <field name="item_observaciones"/>
+                     <field name="state"/>
+                     <field name="control_instalaciones_relacionado"/>
+                     <field name="control_instalaciones_relacionado_cod_sitio"/>
+                      <field name="fecha_estado_po"/>
+                      <field name="n_po"/>
+                      <field name="ud"/>
+                      <field name="precio_unitario"/>
+                      <field name="precio_total"/>
+                      <field name="pac_enviado"/>
+                      <field name="fac_enviado"/>
+                      <field name="fecha_pac"/>
+                      <field name="fecha_fac"/>
+                     <field name="facturacion_pac"/>
+                     <field name="facturacion_fac"/>
+
+
+
+                </tree>
+            </field>
+        </record>
+
+ <!--   **********  formulario  Item  ***********************************   -->
+        <record id="view_item_form" model="ir.ui.view">
+            <field name="name">item.item.form</field>
+            <field name="model">item.item</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Item">
+                    <sheet>
+                        <group>
+                                   <group>
+                                     <field name="name"/>
+                                      <field name="item_observaciones"/>
+                                      <field name="state"/>
+                                      <field name="fecha_estado_po"/>
+                                      <field name="n_po"/>
+                                      <field name="ud"/>
+                                      <field name="precio_unitario"/>
+                                  </group>
+                                  <group>
+                                      <field name="precio_total"/>
+                                      <field name="pac_enviado"/>
+                                      <field name="fac_enviado"/>
+                                      <field name="fecha_pac"/>
+                                      <field name="fecha_fac"/>
+                                     <field name="control_instalaciones_relacionado"/>
+                                  </group>
+
+                                  <group>
+                                      <field name="item_utilizado_contratas"/>
+                                      <field name="contratas_asociado"/>
+                                  </group>
+                        </group>
+
+
+
+<notebook colspan="4">
+                            <page name="control_instalaciones_check_list"   string="Duplicar Item">
+                                <group col="4" colspan="4"  name="control_instalaciones_check_list">
+                                 <table>
+                                     <tr>
+                                        <field name="control_instalaciones_relacionado_duplicar"/>
+                            <button string="Duplicar Item" type="object" name="duplicarItem" class="oe_highlight"/>
+                                     </tr>
+
+                                 </table>
+                                </group>
+
+                            </page>
+</notebook>
+
+
+
+                      <!--   <group></group>
+                     -->
+
+
+
+
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_item">
+            <field name="name">Item </field>
+            <field name="res_model">item.item</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un nuevo Item</p>
+            </field>
+        </record>
+
+<!--   ****************************  Contratista   ********************************     -->
+
+        <record id="view_contratista_tree" model="ir.ui.view">
+            <field name="name">contratista.contratista.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="cont">
+                    <field name="name"/>
+                    <field name="phone"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_contratista">
+            <field name="name">Contratista</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un nuevo Contratista</p>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="action_view_cliente">
+            <field name="name">Cliente</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Crea un nuevo Cliente</p>
+            </field>
+        </record>
+<!-- *******************************************************************************************************************-->
+
+
+
+<!--********************************   Tipo de tipo.seguimiento.administrativo  ****************************************-->
+       <record id="view_tipo_seguimiento_administrativo_tree" model="ir.ui.view">
+            <field name="name">tipo.seguimiento.administrativo.tree</field>
+            <field name="model">tipo.seguimiento.administrativo</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Tipo seguimiento_administrativo">
+                        <!--**************************** Campos:  name    trabajo_descripcion   ************************* -->
+                    <field name="name"  />
+                </tree>
+            </field>
+        </record>
+
+        <!--   **********  formulario  tipo.seguimiento.administrativo ***********************************   -->
+        <record id="view_tipo_seguimiento_administrativo_form" model="ir.ui.view">
+            <field name="name">tipo.seguimiento.administrativo.form</field>
+            <field name="model">tipo.seguimiento.administrativo</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Tipo de Trabajo">
+                    <sheet>
+                        <div class="oe_title">
+                             <table>
+                                  <tr>
+                                      <td>
+                                          <group>
+                                             <field name="name"/>
+                                          </group>
+                                        </td>
+                                  </tr>
+                             </table>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+ <!--   ****************************************  Tipo tipo.seguimiento.administrativo ************************************************ -->
+        <record model="ir.actions.act_window" id="action_view_tipo_seguimiento_administrativo">
+            <field name="name">Seguimiento Administrativo </field>
+            <field name="res_model">tipo.seguimiento.administrativo</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo seguimiento Administrativo</p>
+            </field>
+        </record>
+ <!--   *************************************************************************************-->
+
+
+    <!--********************************   Tipo de tipo.seguimiento.tecnico  **********************************************-->
+       <record id="view_tipo_seguimiento_tecnico_tree" model="ir.ui.view">
+            <field name="name">tipo.seguimiento.tecnico.tree</field>
+            <field name="model">tipo.seguimiento.tecnico</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Tipo seguimiento_tecnico">
+                    <field name="name"  />
+                </tree>
+            </field>
+        </record>
+
+        <!--   **********  formulario  tipo.seguimiento.administrativo ***********************************   -->
+        <record id="view_tipo_seguimiento_tecnico_form" model="ir.ui.view">
+            <field name="name">tipo.seguimiento.tecnico.form</field>
+            <field name="model">tipo.seguimiento.tecnico</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Tipo de Seguimiento Tecnico">
+                    <sheet>
+                        <div class="oe_title">
+                             <table>
+                                  <tr>
+                                      <td>
+                                          <group>
+                                             <field name="name"/>
+                                          </group>
+                                        </td>
+                                  </tr>
+                             </table>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+ <!--   ****************************************  Tipo tipo.seguimiento.tecnico************************************************ -->
+        <record model="ir.actions.act_window" id="action_view_tipo_seguimiento_tecnico">
+            <field name="name">Seguimiento Tecnico </field>
+            <field name="res_model">tipo.seguimiento.tecnico</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo seguimiento Tecnico</p>
+            </field>
+        </record>
+ <!--   *************************************************************************************-->
+
+
+<!--***************************************   Contratas ****************************************************************-->
+       <record id="view_contratas_tree" model="ir.ui.view">
+            <field name="name">contrata.item.tree</field>
+            <field name="model">contrata.item</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Contratas Item">
+
+                     <!--
+                    <field name="write_date" string="Ultima modificacion"/>
+                    <field name="carga_actualizadocontrata"/>
+                    -->
+
+                    <field name="name"/>
+                    <field name="telyman_core_id"/>
+                    <field name="telyman_core_id_cod_sitio"/>
+                    <field name="aceptado"/>
+                    <field name="contrata_id"/>
+                    <field name="po_contrata"/>
+                    <field name="aceptado"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!--   **********  formulario  Contratas  ***********************************   -->
+        <record id="view_contrata_item_form" model="ir.ui.view">
+            <field name="name">contrata.item.form</field>
+            <field name="model">contrata.item</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Contratas">
+                    <sheet>
+                        <div class="oe_title">
+                             <table>
+                                  <tr>
+                                      <td>
+                                          <group>
+                                             <field name="name"/>
+                                              <field name="codigo"/>
+                                              <field name="contrata_id"/>
+                                              <field name="po_contrata"/>
+                                              <field name="ud_contrata"/>
+                                              <field name="precio_unitario"/>
+                                              <field name="precio_total"/>
+                                              <field name="aceptado"/>
+                                              <field name="fecha_fact_contrata"/>
+                                              <field name="num_contrato"/>
+                                              <field name="fecha_pago_contrata"/>
+                                              <field name="item_id"/>
+                                              <field name="telyman_core_id"/>
+                                              <field name="contratas_observaciones"/>
+                                          </group>
+                                        </td>
+                                  </tr>
+                             </table>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+ <!--   **************************************** Contratas************************************************ -->
+        <record model="ir.actions.act_window" id="action_view_contratas">
+            <field name="name">Contratas </field>
+            <field name="res_model">contrata.item</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo Contratas Item</p>
+            </field>
+        </record>
+ <!--   *************************************************************************************-->
+
+        <record id="control_instalaciones_filter" model="ir.ui.view">
+            <field name="name">contrata.item.select</field>
+            <field name="model">contrata.item</field>
+            <field name="arch" type="xml">
+                <search string="Busqueda de Contratas">
+
+     <field name="name" string="Contratas" filter_domain="['|','|', '|',  ('name','ilike',self), ('telyman_core_id','ilike',self), ('contrata_id','ilike',self),('po_contrata','ilike',self)]"/>
+
+
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_telyman_core_id" string="Proyecto" context="{'group_by':'telyman_core_id'}"/>
+                        <filter name="group_by_contratista" string="Contratista" context="{'group_by':'contrata_id'}"/>
+                        <filter name="group_by_po_contrata" string="PO Contrata" context="{'group_by':'po_contrata'}"/>
+                    </group>
+               </search>
+            </field>
+        </record>
+
+<!--   *****************************************************************************     -->
+
+<!--   -->
+
+
+
+<!--*******************************************  Cotizaciones  *****************************************************************-->
+<!--******************************************* Cotizaciones   vista ************************************************************-->
+        <record id="view_cotizaciones_tree" model="ir.ui.view">
+            <field name="name">cotizaciones_instalaciones.cotizaciones_instalaciones.tree</field>
+            <field name="model">cotizaciones_instalaciones.cotizaciones_instalaciones</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Cotizaciones">
+                <field name="codigo"/>
+                    <field name="codigo"/>
+                     <field name="cotizacion_cod_sitio"/>
+                    <field name="cotizacion_instalacion_creada"/>
+
+                </tree>
+            </field>
+        </record>
+
+ <!--   **********  Cotizaciones  form***********************************  -->
+        <record id="view_cotizaciones_form" model="ir.ui.view">
+            <field name="name">cotizaciones_instalaciones.cotizaciones_instalaciones.form</field>
+            <field name="model">cotizaciones_instalaciones.cotizaciones_instalaciones</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Cotizaciones">
+                    <sheet>
+                        <group>
+                            <field name="codigo"/>
+                            <field name="cotizacion_cod_sitio"/>
+                             <field name="cotizacion_tipo_trabajo"/>
+                            <field name="cotizacion_cliente"/>
+                            <field name="cotizacion_fecha_emision"/>
+                            <field name="producto_contrato"/>
+                            <field name="cotizacion_observaciones"/>
+                            <field name="cotizacion_instalacion_creada"/>
+
+
+
+                        </group>
+                <notebook colspan="4">
+
+                            <page name="control_cotizaciones" string="Productos">
+
+                                <group col="4" colspan="4"  name="control_cotizaciones">
+                                        <tree string="Productos Relacionados">
+                                            <field name="productos_relacionados" string="cotizaciones" editable="bottom">
+                                                <tree editable="bottom">
+
+                                                    <field name="producto_name" domain="[('categ_id','=', parent.producto_contrato)]"/>
+                                                    <field name="producto_ud"/>
+                                                    <field name="producto_precio_unitario"/>
+                                                    <field name="producto_precio_total"   sum="Total"   />
+
+                                                </tree>
+                                            </field>
+                                        </tree>
+                                </group>
+                            </page>
+
+                            <page name="control_cotizaciones"   string="Crear Instalación">
+                                <group col="4" colspan="4"  name="control_instalaciones_check_list">
+                                 <table>
+                                     <tr>
+ <!---->
+                                         <field name="cotizacion_nombre_sitio"/>
+
+                                         <field name="cotizacion_ubicacion_Gam_rural"/>
+                                         <field name="cotizacion_ubicacion"/>
+                                         <field name="cotizacion_provincia"/>
+                                         <field name="cotizacion_nombre_proyecto"/>
+                                         <field name="cotizacion_operador"/>
+
+                                     </tr>
+
+                                 </table>
+                                     <tr>
+
+                                         <button string="Crear Instalación" type="object" name="crear_instalacion_cotizacion" class="oe_highlight"/>
+
+
+                                     </tr>
+                                </group>
+
+                            </page>
+                    </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_cotizaciones">
+            <field name="name">Cotizaciones</field>
+            <field name="res_model">cotizaciones_instalaciones.cotizaciones_instalaciones</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Cotización</p>
+            </field>
+        </record>
+ <!--   ****************************************************************************************     -->
+
+
+
+
+
+
+
+
+
+<!--*******************************************  producto  *****************************************************************-->
+<!--******************************************* producto  vista ************************************************************-->
+        <record id="view_producto_tree" model="ir.ui.view">
+            <field name="name">producto.producto.tree</field>
+            <field name="model">producto.producto</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Producto">
+                        <field name="producto_name"/>
+                        <field name="producto_ud"/>
+                        <field name="producto_precio_unitario"/>
+                        <field name="producto_precio_total"    sum="Total"        />
+                        <field name="cotizacion_relacionado_id"/>
+
+                </tree>
+            </field>
+        </record>
+
+ <!--   ********** Producto  form***********************************   -->
+        <record id="view_producto_form" model="ir.ui.view">
+            <field name="name">producto.producto.form</field>
+            <field name="model">producto.producto</field>
+            <field name="priority" eval="5"/>
+            <field name="arch" type="xml">
+                <form string="Producto">
+                    <sheet>
+                        <group>
+                        <field name="producto_name"/>
+                        <field name="producto_ud"/>
+                        <field name="producto_precio_unitario"/>
+                        <field name="producto_precio_total"/>
+                        <field name="cotizacion_relacionado_id"/>
+                        </group>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_producto">
+            <field name="name">Productos</field>
+            <field name="res_model">producto.producto</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Producto</p>
+            </field>
+        </record>
+ <!--   ****************************************************************************************     -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--   ************************************************************************************************-->
+
+
+
+<!--   ****************************************  Menu     ************************************************
+ <menuitem id="menu_proyectos_hijo3"  name="Reportes"         parent="menu_proyectos_padre"  sequence="4"/>
+  -->
+        <menuitem id="menu_proyectos_padre"      name="Proyectos"/>
+        <menuitem id="menu_instalaciones"  name="Instalaciones" parent="menu_proyectos_padre"  sequence="1"/>
+
+
+
+
+        <menuitem id="instalaciones1"  name="Instalaciones" parent="menu_instalaciones" action="action_view_control_instalaciones" />
+        <menuitem id="instalaciones2"  name="Pre Instalaciones" parent="menu_instalaciones" action="action_view_preInstalacion" />
+       <menuitem id="instalaciones3"  name="Alertas Instalaciones" parent="menu_instalaciones" action="action_view_control_instalaciones_Alerta" />
+
+
+
+<!---->
+ <menuitem id="instalaciones4"  name="Cotizaciones" parent="menu_instalaciones" action="action_view_cotizaciones" />
+ <menuitem id="instalaciones5"  name="Productos de Cotizaciones" parent="menu_instalaciones" action="action_view_producto" />
+
+
+
+
+
+
+
+        <menuitem id="menu_proyectos_hijo3" name="Relacionados"     parent="menu_proyectos_padre"  sequence="2"/>
+        <menuitem id="menu_instalaciones10" name="Items"            parent="menu_proyectos_hijo3" action="action_view_item" />
+        <menuitem id="menu_instalaciones11" name="Contratas"        parent="menu_proyectos_hijo3"   action="action_view_contratas" />
+        <menuitem id="menu_instalaciones12" name="Historial Proy"        parent="menu_proyectos_hijo3"   action="action_view_historial_instalacion" />
+
+        <menuitem id="menu_proyectos_hijo2"  name="Configuración"         parent="menu_proyectos_padre"  sequence="3"/>
+        <menuitem id="menu_instalaciones20"  name="Tipo Trabajo"          parent="menu_proyectos_hijo2" action="action_view_tipo_trabajo" />
+        <menuitem id="menu_instalaciones21"  name="Contratista"           parent="menu_proyectos_hijo2" action="action_view_contratista" />
+        <menuitem id="menu_instalaciones22"  name="Cliente"               parent="menu_proyectos_hijo2" action="action_view_cliente" />
+        <menuitem id="menu_instalaciones23"  name="Seguimiento Administrativo"    parent="menu_proyectos_hijo2" action="action_view_tipo_seguimiento_administrativo" />
+        <menuitem id="menu_instalaciones24"  name="Seguimiento Tecnico"           parent="menu_proyectos_hijo2" action="action_view_tipo_seguimiento_tecnico" />
+
+
+
+
+        <menuitem id="menu_proyectos_hijo4"  name="Rpt"  parent="menu_proyectos_padre"  sequence="4"/>
+
+        <menuitem id="menu_instalaciones41"  name="Rpt FAC Enviado X Fecha"           parent="menu_proyectos_hijo4" action="action_view_item_reporte4" />
+        <menuitem id="menu_instalaciones42"  name="Rpt PAC Enviado X Fecha"           parent="menu_proyectos_hijo4" action="action_view_item_reporte5" />
+
+        <menuitem id="menu_instalaciones43"  name="Rpt instalaciones"                 parent="menu_proyectos_hijo4" action="action_view_instalacion_reporte1" />
+        <menuitem id="menu_instalaciones44"  name="Rpt Estado PO X Fecha"             parent="menu_proyectos_hijo4" action="action_view_item_reporte3" />
+        <menuitem id="menu_instalaciones45"  name="Rpt Seguimiento PTE Factura"       parent="menu_proyectos_hijo4" action="action_view_item_reporte1" />
+
+        <menuitem id="menu_instalaciones46"  name="Rpt PO Facturadas"                 parent="menu_proyectos_hijo4" action="action_view_item_reporte2" />
+
+
+        <menuitem id="menu_instalaciones47"  name="Rpt Instalaciones Documentación"   parent="menu_proyectos_hijo4" action="action_view_control_instalaciones_Reporte1" />
+        <menuitem id="menu_instalaciones48"  name="Rpt Contratas aceptadas"           parent="menu_proyectos_hijo4" action="action_view_contratas_reporte1" />
+
+
+        <menuitem id="menu_instalaciones49"  name="Rpt Seguimiento Técnico"                 parent="menu_proyectos_hijo4" action="action_view_instalacion_reporte2" />
+        <menuitem id="menu_instalaciones50"  name="Rpt Seguimiento Administrativo"          parent="menu_proyectos_hijo4" action="action_view_instalacion_reporte3" />
+        <menuitem id="menu_instalaciones51"  name="Rpt Seguimiento Tecnico y Administrativo" parent="menu_proyectos_hijo4" action="action_view_instalacion_reporte4" />
+<!---->
+<!---->
+        <menuitem id="menu_instalaciones52"  name="Rpt Items NO Facturados" parent="menu_proyectos_hijo4" action="action_view_item_reporte6" />
+
+
+
+
+
+
+        <menuitem id="menu_proyectos_padre2"      name="Cotizaciones"/>
+
+
+    </data>
+</odoo>

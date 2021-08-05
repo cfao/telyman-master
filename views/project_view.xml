@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_telyman_form_view" model="ir.ui.view">
+        <field name="name">project.telyman.form.view</field>
+        <field name="model">project.telyman</field>
+        <field name="arch" type="xml">
+            <form string="Proyectos">
+                <group>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <field name="client"/>
+                    <field name="project_description"/>
+                    <field name="proyecto_id"/>
+                    <field name="supervisor" domain="[('supervisor_cliente', '=', True)]" options="{'no_create': True}"/>
+                    <field name="project_manager" domain="[('jefe_proyecto_cliente', '=', True)]" options="{'no_create': True}"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_telyman_tree_view" model="ir.ui.view">
+        <field name="name">project.telyman.tree.view</field>
+        <field name="model">project.telyman</field>
+        <field name="arch" type="xml">
+            <tree string="Proyectos">
+                <field name="name"/>
+                <field name="project_description"/>
+                <field name="client"/>
+                <field name="supervisor"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_project_telyman" model="ir.actions.act_window">
+        <field name="name">Proyectos</field>
+        <field name="res_model">project.telyman</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+</odoo>

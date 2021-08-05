@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+
+    <act_window id="contrata_wizard_action"
+                name="Contratas Action"
+                res_model="control_instalaciones.wizard"
+                binding_model="control_instalaciones.control_instalaciones"
+                view_mode="form"
+                target="new"/>
+
+
+
+  <record id="contratas_wizard_view" model="ir.ui.view">
+        <field name="name">Contratas</field>
+        <field name="model">control_instalaciones.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group name="codes1" string="Datos Generales">
+                        <field name="wiz_proyecto"/>
+                        <field name="wiz_cod_sitio"/>
+                        <field name="wiz_nombre_sitio"/>
+                        <field name="wiz_nombre_proyecto"/>
+                    </group>
+                    <group name="codes" string="Detalle">
+                         <field name="wiz_contrata_id" domain="[('contrata_inst', '=', True)]"/>
+                        <field name="wiz_po_contrata" />
+                    </group>
+                    <notebook colspan="4">
+                        <page name="control_instalaciones_contratas" string="Contratas">
+
+                            <group col="4" colspan="4"  name="control_instalaciones_contratas1">
+                                    <tree string="Contratas">
+                                        <field name="wiz_contrata_ids" string="Items" editable="bottom">
+                                            <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="contrata_id"  />
+
+                                            </tree>
+                                        </field>
+                                    </tree>
+                            </group>
+                        </page>
+                    </notebook>
+                    <!--<button string="Prueba" type="object" name="imprimir_reporte" class="oe_highlight"/>
+                    <button type="action" name="test" string="Imprimir"/>
+                    <button string="Cancel" class="oe_right" special="cancel"/>-->
+                </sheet>
+
+
+
+            </form>
+        </field>
+    </record>
+
+
+
+
+
+
+
+
+
+
+       <!--  -->
+
+
+
+
+
+</odoo>

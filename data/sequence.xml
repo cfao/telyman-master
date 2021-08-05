@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data >
+
+        <record id="seq_control_instacion" model="ir.sequence">
+            <field name="name">Instalaciones</field>
+            <field name="code">instalaciones</field>
+            <field name="prefix"></field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+        <record id="seq_control_cotizacion" model="ir.sequence">
+            <field name="name">Cotizaciones</field>
+            <field name="code">cotizaciones</field>
+            <field name="prefix"></field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+
+
+    </data>
+</openerp>

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+               <record id="view_control_instalaciones_tree" model="ir.ui.view">
+            <field name="name">telyman.control_instalaciones.tree</field>
+            <field name="model">telyman.control_instalaciones</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <tree string="Control de Instalaciones"      >
+ <!--   -->
+                    <button string="Act" type="object" name="generar_linea" class="oe_highlight"/>
+                    <field name="client"/>
+                    <field name="contrata_inst" string="Contrata"/>
+                    <field name="fecha_inic_inst" string="Fecha Inicio Inst"/>
+                    <field name="fecha_fin_inst" string="Fecha Fin Inst"/>
+                    <field name="items_precio_total_instalacion" string="Valor Total"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+<!--   **********  formulario   Control Instalaciones  ************************************************   -->
+        <record id="view_control_instalaciones_form" model="ir.ui.view">
+            <field name="name">Instalaciones.form</field>
+            <field name="model">telyman.control_instalaciones</field>
+            <field name="priority" eval="5" />
+            <field name="arch" type="xml">
+                <form string="Control de Instalaciones">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                             <group name="codes1" string="Datos Generales">
+                                 <field name="cod_project"/>
+                                 <field name="project_id"/>
+                                 <field name="client"></field>
+                                 <field name="cod_sitio" domain="[('site_client', '=', client)]"/>
+                                 <field name="tipo_trabajo" string="Tipo Trabajo"/>
+                            </group>
+                            <group name="codes" string="Seguimiento">
+                                <field name="seg_administrativo"/>
+                                <field name="seg_tecnico"/>
+                                <field name="currency_id"/>
+                                <field name="tipo_cambio" string="Tipo Cambio $"/>
+                            </group>
+                        </group>
+                        <group name="codes" string="Datos Instalador">
+                            <group>
+                                <field name="contrata_inst" domain="[('contrata_inst', '=', True)]"/>
+                                <field name="jefe_cuadrilla_inst"  domain="[('jefe_cuadrilla', '=', True)]"/>
+                                <field name="sup_telyman_inst"  domain="[('sup_telyman', '=', True)]"/>
+                                <field name="jefe_proyecto" domain="[('jefe_proyecto', '=', True)]"/>
+                                <field name="quickbook"/>
+                            </group>
+                            <group>
+                                <field name="fecha_planific_inst"/>
+                                <field name="fecha_inic_inst"/>
+                                <field name="fecha_fin_inst"/>
+                                <field name="modificar_fecha_proyecto" invisible="1"/>
+                                <field name="fecha_produccion_inst" attrs="{'readonly': [('modificar_fecha_proyecto', '=', False)]}"/>
+                                <button name="modificar_fecha" type="object" string="Modificar fecha Produccion"/>
+                                <button name="bloquear_fecha" type="object" string="Bloquear fecha Produccion"/>
+                            </group>
+                        </group>
+                        <notebook colspan="4">
+                            <page name="control_instalaciones_item" string="Item">
+                                <group col="4" colspan="4"  name="control_instalaciones_item">
+                                        <tree string="Items Relacionados">
+                                            <field name="items_relacionados" string="Items" editable="bottom">
+                                                <tree editable="bottom">
+                                                    <field name="item_utilizado_contratas"/>
+                                                    <field name="name" domain="[('categ_id','=', parent.project_id)]" options="{'no_create': True}"/>
+                                                    <field name="item_observaciones"/>
+                                                    <field name="state"/>
+                                                    <field name="fecha_estado_po"/>
+                                                    <field name="n_po"/>
+                                                    <field name="ud"/>
+                                                    <field name="precio_unitario"/>
+                                                    <field name="precio_total" sum="Total"/>
+                                                    <field name="precio_unitario_dollar" />
+                                                    <field name="precio_total_dollar"  sum="Total"   />
+                                                    <field name="pac_enviado"/>
+                                                    <field name="fac_enviado"/>
+                                                    <field name="fecha_pac"/>
+                                                    <field name="facturacion_pac"/>
+                                                    <field name="fecha_fac"/>
+                                                    <field name="facturacion_fac"/>
+                                                </tree>
+                                            </field>
+                                        </tree>
+                                </group>
+                            </page>
+                            <page name="control_instalaciones_documentacion"  string="Documentaciòn">
+                                <group col="4" colspan="4"  name="control_instalaciones_documentacion">
+                                    <table style="width: 100%;">
+                                        <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th class="text-left">Recibidos/ Realizados</th>
+                                                    <th class="text-left">Aprobado</th>
+                                                    <th class="text-center">Enviado Clientes</th>
+                                                    <th class="text-left">Aprobado</th>
+                                                    <th class="text-center">Observaciones</th>
+                                                </tr>
+                                         </thead>
+                                        <tr>
+                                            <td> <field name="planos_docu" />    Planos             </td>
+                                            <td> <field name="planos_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="planos_realizado_aprob_docu" />       </td>
+                                            <td> <field name="planos_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="planos_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="planos_observacion_docu" />           </td>
+                                        </tr>
+                                        <tr>
+                                            <td> <field name="foto_docu" />    Fotografia         </td>
+                                            <td> <field name="foto_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="foto_realizado_aprob_docu" />       </td>
+                                            <td> <field name="foto_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="foto_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="planos_observacion_docu" />         </td>
+                                        </tr>
+                                        <tr>
+                                            <td> <field name="AS_build_docu" />     AS Build          </td>
+                                            <td> <field name="AS_build_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="AS_build_realizado_aprob_docu" />       </td>
+                                            <td> <field name="AS_build_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="AS_build_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="AS_build_observacion_docu" />             </td>
+                                        </tr>
+                                         <tr>
+                                            <td> <field name="ATP_docu" />    APT/Check List     </td>
+                                            <td> <field name="ATP_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="ATP_realizado_aprob_docu" />       </td>
+                                            <td> <field name="ATP_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="ATP_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="ATP_observacion_docu" />          </td>
+                                        </tr>
+                                         <tr>
+                                            <td> <field name="EHS_docu" />      EHS                 </td>
+                                            <td> <field name="EHS_fecha_recibido_docu" />        </td>
+                                            <td class="text-center"> <field name="EHS_realizado_aprob_docu" />       </td>
+                                            <td> <field name="EHS_fecha_envio_cliente_docu" />   </td>
+                                            <td class="text-center"> <field name="EHS_envio_cliente_aprobado_docu" /></td>
+                                            <td> <field name="EHS_observacion_docu" />           </td>
+                                        </tr>
+
+                                    </table>
+                                </group>
+                            </page>
+                            <page name="control_instalaciones_check_list"   string="Check List">
+                                <group col="4" colspan="4"  name="control_instalaciones_check_list">
+                                    <field name="fecha_chck" />
+                                    <field name="estado_chck" />
+                                    <field name="realizado_chck" />
+                                    <field name="fecha_enviado_chck" />
+                                </group>
+                                <field name="chck_observaciones" />
+                            </page>
+                            <page name="control_instalaciones_contratas"  string="Contratas">
+                                <field name="contrata_ids">
+                                    <tree editable="bottom">
+                                      <field name="carga_actualizadocontrata"/>
+                                      <field name="name"/>
+                                      <field name="contrata_id"  domain="[('contrata', '=', True)]"/>
+                                      <field name="po_contrata"/>
+                                      <field name="ud_contrata"/>
+                                      <field name="precio_unitario"/>
+                                      <field name="precio_total"  sum="Total"/>
+                                      <field name="aceptado"/>
+                                      <field name="fecha_fact_contrata"/>
+                                      <field name="num_contrato"/>
+                                      <field name="fecha_pago_contrata"/>
+                                      <field name="contratas_observaciones"/>
+                                    </tree>
+                                </field>
+                                <lable>Orden de Compra :</lable>    <field name="cliente_orden_compra"/>
+                           </page>
+                            <page name="control_instalaciones_calculos"   string="Calculos">
+                                <group name="control_instalaciones_calculos">
+                                    <group>
+                                        <field name="items_relacionados_precio_total_aprobado" string="Item Total Aprobado"/>
+                                        <field name="items_relacionados_precio_total_solicitado" string="Item Solicitado"/>
+                                        <field name="items_relacionados_pac_facturado" string="PAC Facturado"/>
+                                        <field name="items_relacionados_fac_facturado" string="FAC Facturado"/>
+                                        <field name="items_relacionados_pac_fecha" string="PAC Fecha"/>
+                                        <field name="items_relacionados_fac_fecha" string="FAC Fecha"/>
+                                    </group>
+                                    <group>
+                                        <field name="fecha_alerta1" string="Alerta"/>
+                                        <field name="alerta1" string="Alertar"/>
+                                        <field name="contador_Alerta" string="Contador Alerta"/>
+                                        <field name="alerta_observaciones" string="Observaciones Alerta"/>
+                                        <field name="chck_observaciones"      string="Observaciones "/>
+                                    </group>
+                                </group>
+                           </page>
+                           <page name="control_instalaciones_historial" string="Historial" >
+                                <group col="4" colspan="4"  name="control_instalaciones_historial">
+                                    <tree string="Historial">
+                                        <field name="historial_relacionado" string="Historial" editable="bottom">
+                                            <tree editable="bottom">
+                                                <field name="historial_fecha"/>
+                                                <field name="historial_descripcion"/>
+                                                <field name="historial_PO"/>
+                                                <field name="historial_observaciones"/>
+                                                <field name="historial_fecha_entrega_materiales"/>
+                                                <field name="historial_materiales"/>
+                                                <field name="historial_DU"/>
+                                                <field name="historial_porcentaje_avance"/>
+                                                <field name="tipo_tecnologia"/>
+                                                <field name="tipo_partner"/>
+                                            </tree>
+                                        </field>
+                                    </tree>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_view_telyman_instalaciones">
+            <field name="name">Instalaciones Nuevo</field>
+            <field name="res_model">telyman.control_instalaciones</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Crea un nuevo proyecto</p>
+            </field>
+        </record>
+    </data>
+</odoo>

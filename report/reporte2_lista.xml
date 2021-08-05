@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<data>
+<template id="reporte2_lista">
+    <t t-call="report.html_container">
+       <t t-call="report.internal_layout">
+          <div class="page">     <!--     -->
+              <div class="oe_structure"/>
+
+
+
+
+
+
+              <caption>Control de Instalaciones</caption>
+                  <thead>
+                    <tr>
+                        <br/>
+                        <strong>Nombre Sitio  </strong>
+                        <strong>Operador  </strong>
+                        <strong>Tipo Trabajo  </strong>
+                        <strong>Ubicación   </strong>
+                        <strong>Provincia   </strong>
+                        <strong>Nombre Proyecto   </strong>
+                        <br/><br/>
+                    </tr>
+                  </thead>
+
+
+
+
+                  <t t-foreach="docs" t-as="record2">
+
+                      <tr>
+
+                          <td>  <span  t-field="record2.nombre_sitio" /> </td>
+                          <td> <span  t-field="record2.operador" />  </td>
+                          <td>  <span  t-field="record2.tipo_trabajo" /> </td>
+                          <td>  <span  t-field="record2.ubicacion" /> </td>
+                          <td>   <span  t-field="record2.provincia" /> </td>
+                          <td>  <span  t-field="record2.nombre_proyecto" /> </td>
+
+
+                      </tr>
+
+                      <br/>
+                  </t>
+
+
+
+          </div>
+       </t>
+    </t>
+
+
+
+   </template>
+
+</data>

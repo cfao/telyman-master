@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report
+            id="action_reporte4"
+            model="control_instalaciones.control_instalaciones"
+            string="Orden de Compra 4"
+            report_type="qweb-pdf"
+            file="telyman.reporte_orden_compra4"
+            name="telyman.reporte_orden_compra4"
+        />
+    </data>
+</openerp>

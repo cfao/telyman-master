@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report
+            id="action_reporte3"
+            model="control_instalaciones.control_instalaciones"
+            string="Control de Seguimiento Administrativo"
+            report_type="qweb-pdf"
+            file="telyman.reporte3_lista"
+            name="telyman.reporte3_lista"
+        />
+    </data>
+</openerp>

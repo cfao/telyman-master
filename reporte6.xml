@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report
+            id="action_reporte6"
+            model="control_instalaciones.wizard"
+            string="Orden de Compra6"
+            report_type="qweb-pdf"
+            file="telyman.reporte_orden_compra6"
+            name="telyman.reporte_orden_compra6"
+        />
+    </data>
+</openerp>

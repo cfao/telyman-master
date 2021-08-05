@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<data>
+<template id="reporte1_lista">
+
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="record">
+            <t t-call="report.internal_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+
+                    <div>
+
+                        <table   class="table table-borderless">
+
+                           <thead>
+                           <tr>
+                               <td>
+                                       <!-- ********************************* Datos Generales  ************************************
+                                         cod_sitio    nombre_sitio   operador tipo_trabajo  ubicacion
+                                               provincia  nombre_proyecto   coord_x    coord_y    -->
+
+                                       <strong>
+                                           <center>
+                                                <h1> <span class="badge badge-secondary">Datos Generales</span></h1>
+                                           </center>
+                                       </strong>
+
+                                       <br/>
+                                       <strong>Cod: </strong>
+                                       <span t-if="record.cod_sitio"  scope="row" t-field="record.cod_sitio" />
+                                       <br/>
+
+                                       <strong>Nombre Sitio: </strong>
+                                       <span t-if="record.nombre_sitio" t-field="record.nombre_sitio" />
+                                       <br/>
+
+                                       <strong>Operador: </strong>
+                                       <span t-if="record.operador" t-field="record.operador" />
+                                       <br/>
+
+                                       <strong>Tipo Trabajo: </strong>
+                                       <span t-if="record.tipo_trabajo" t-field="record.tipo_trabajo" />
+                                       <br/>
+
+                                       <strong>Ubicacion: </strong>
+                                       <span t-if="record.ubicacion" t-field="record.ubicacion" />
+                                       <br/>
+
+                                       <strong>Provincia: </strong>
+                                       <span t-if="record.provincia" t-field="record.provincia" />
+                                       <br/>
+
+                                       <strong>Nombre Proyecto: </strong>
+                                       <span t-if="record.nombre_proyecto" t-field="record.nombre_proyecto" />
+                                       <br/>
+
+                                       <strong>Cor Y: </strong>
+                                       <span t-if="record.coord_x" t-field="record.coord_x" />
+                                       <br/>
+
+                                       <strong>Cor X: </strong>
+                                       <span t-if="record.coord_y" t-field="record.coord_y" />
+                                       <br/>
+                                </td>
+
+
+                               <td>
+                                     <!-- ********************************* Datos del Instalador ************************************
+
+                               contrata_inst   jefe_cuadrilla_inst     sup_telyman_inst    fecha_planific_inst
+                                                fecha_inic_inst   fecha_fin_inst  fecha_produccion_inst    quickbook -->
+
+
+                                       <strong>
+                                           <center>
+                                                <h1> <span class="badge badge-secondary">Datos del Instalador</span></h1>
+                                           </center>
+                                       </strong>
+
+
+
+
+                                       <br/>
+
+                                       <strong>Contrata:</strong>
+                                       <span t-if="record.contrata_inst" t-field="record.contrata_inst" />
+                                       <br/>
+
+                                       <strong>Jefe Cuadrilla: </strong>
+                                       <span t-if="record.jefe_cuadrilla_inst" t-field="record.jefe_cuadrilla_inst" />
+                                       <br/>
+
+                                       <strong>Supervisor: </strong>
+                                       <span t-if="record.sup_telyman_inst" t-field="record.sup_telyman_inst" />
+                                       <br/>
+
+                                       <strong>Fecha Planif: </strong>
+                                       <span t-if="record.fecha_planific_inst" t-field="record.fecha_planific_inst" />
+                                       <br/>
+
+                                       <strong>Fecha Inicio Inst: </strong>
+                                       <span t-if="record.fecha_inic_inst" t-field="record.fecha_inic_inst" />
+                                       <br/>
+
+                                       <strong>Fecha Final Inst: </strong>
+                                       <span t-if="record.fecha_fin_inst" t-field="record.fecha_fin_inst" />
+                                       <br/>
+
+                                       <strong>Cor X </strong>
+                                       <span t-if="record.fecha_produccion_inst" t-field="record.fecha_produccion_inst" />
+                                       <br/>
+
+                                       <strong>Cor X </strong>
+                                       <span t-if="record.quickbook " t-field="record.coord_y" />
+                                       <br/>
+
+                               </td>
+                           </tr>
+                          </thead>
+
+
+
+
+
+
+                          <thead>
+                           <tr>
+
+                               <td>
+                                    <!-- ****************************** Datos Cliente **********************************
+                                     cliente   supervisor_cliente    jefe_proyecto_cliente         -->
+
+
+                                       <strong>
+                                           <center>
+                                                <h1> <span class="badge badge-secondary">Datos del Cliente</span></h1>
+                                           </center>
+                                       </strong>
+
+
+
+                                       <br/>
+
+                                       <strong>Cliente </strong>:
+                                       <span t-if="record.cliente" t-field="record.cliente" />
+                                       <br/>
+
+                                       <strong>Supervisor </strong>:
+                                       <span t-if="record.supervisor_cliente" t-field="record.supervisor_cliente" />
+                                       <br/>
+
+                                       <strong>Jefe de Proyecto </strong>:
+                                       <span t-if="record.jefe_proyecto_cliente" t-field="record.jefe_proyecto_cliente" />
+                                       <br/>
+
+                               </td>
+                               <td>
+                            <!-- ****************************** Seguimiento**********************************
+                                    seg_administrativo      seg_tecnico    -->
+
+
+                                       <strong>
+                                           <center>
+                                                <h1> <span class="badge badge-secondary">Seguimiento</span></h1>
+                                           </center>
+                                       </strong>
+
+
+
+                                       <br/>
+
+                                       <strong>Jefe de Proyecto </strong>:
+                                       <span t-if="record.seg_administrativo" t-field="record.seg_administrativo" />
+                                       <br/>
+                                       <strong>Jefe de Proyecto </strong>:
+                                       <span t-if="record.seg_tecnico" t-field="record.seg_tecnico" />
+                                       <br/>
+                               </td>
+                           </tr>
+                           </thead>
+
+
+
+
+
+
+
+                        </table>
+                    </div>
+
+                    <div>
+                        <!-- ****************************** Items **********************************  <center> </center> -->
+                                <strong>
+                                      <h1> <span class="badge badge-secondary">Datos Generales</span></h1>
+                                 </strong>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                                <th data-id="name" class="o_column_sortable">
+                                                    Item
+                                                </th>
+
+                                                <th data-id="state" class="o_column_sortable">
+                                                    Estado
+                                                </th>
+
+                                                <th data-id="fecha_estado_po" class="o_column_sortable">
+                                                    Fecha estado PO
+                                                </th>
+
+                                                <th data-id="n_po" class="o_column_sortable">
+                                                    Num PO
+                                                </th>
+
+                                                <th data-id="ud" class="o_column_sortable">
+                                                    Ud
+                                                </th>
+
+                                                <th data-id="precio_unitario" class="o_column_sortable">
+                                                    Precio Unitario
+                                                </th>
+
+                                                <th data-id="precio_total" class="o_column_sortable">
+                                                    Precio Total
+                                                </th>
+
+                                                <th data-id="pac_enviado" class="o_column_sortable">
+                                                    PAC enviado
+                                                </th>
+
+                                                <th data-id="fac_enviado" class="o_column_sortable">
+                                                    FAC enviado
+                                                </th>
+
+                                                <th data-id="fecha_pac" class="o_column_sortable">
+                                                    Fecha PAC
+                                                </th>
+
+                                                <th data-id="fecha_fac" class="o_column_sortable">
+                                                    Fecha FAC
+                                                </th>
+
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                            <t t-foreach="record.items_relacionados" t-as="item"  string="Items">
+                                                    <!--     <span t-field="record.coord_y" />
+                                                <span t-esc="item.funcionLlamada()"  /> -->
+                                                 <tr>
+                                                    <td><span t-field="item.name"  /></td>
+                                                    <td><span t-field="item.state"/></td>
+                                                    <td><span t-field="item.fecha_estado_po"/></td>
+                                                    <td><span t-field="item.n_po"/></td>
+                                                    <td><span t-field="item.ud"/></td>
+                                                    <td><span t-field="item.precio_unitario"/></td>
+                                                    <td><span t-field="item.precio_total" sum="Total"/></td>
+                                                    <td><span t-field="item.pac_enviado"/></td>
+                                                    <td><span t-field="item.fac_enviado"/></td>
+                                                    <td><span t-field="item.fecha_pac"/></td>
+                                                    <td><span t-field="item.fecha_fac"/></td>
+                                                 </tr>
+                                                <b/>
+                                            </t>
+                                    </tbody>
+
+
+                                </table>
+                    </div>
+
+
+                    <div>
+                         <strong>
+                                      <h1> <span class="badge badge-secondary">Documentación</span></h1>
+                          </strong>
+
+                                      <tr>
+                                        <td><span t-esc="record.planos_docu"  /></td>
+                                        <td><span t-esc="record.planos_fecha_recibido_docu"  /></td>
+                                     </tr>
+
+
+
+
+                    </div>
+
+
+                 </div>
+                </t>
+             </t>
+
+        </t>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </template>
+
+</data>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

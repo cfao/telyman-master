@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_view,access.project.telyman,model_project_telyman,base.group_user,1,1,1,1
+access_sites_view,access.sites.telyman,model_sites_telyman,base.group_user,1,1,1,1
+access_control_instalaciones,access.control_instalaciones.control_instalaciones,model_control_instalaciones_control_instalaciones,base.group_user,1,1,1,1
+access_tipo_trabajo,access.tipo_trabajo.tipo_trabajo,model_tipo_trabajo_tipo_trabajo,base.group_user,1,1,1,1
+access_tipo_seguimiento_administrativo,access.tipo.seguimiento.administrativo,model_tipo_seguimiento_administrativo,base.group_user,1,1,1,1
+access_tipo_seguimiento_tecnico,access.tipo.seguimiento.tecnico,model_tipo_seguimiento_tecnico,base.group_user,1,1,1,1
+access_item_view,access.items.telyman,model_telyman_item,base.group_user,1,1,1,1
+access_telyman_control_instalaciones_view,access.telyman_control_instalaciones,model_telyman_control_instalaciones,base.group_user,1,1,1,1
+access_contractor_view,access.contractor.telyman,model_contrata_telyman,base.group_user,1,1,1,1
+access_history_view,access.history.telyman,model_telyman_historial,base.group_user,1,1,1,1

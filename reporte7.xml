@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report
+            id="action_cotizacion1"
+            model="producto.producto"
+            string="Cotización1"
+            report_type="qweb-pdf"
+            file="telyman.reporte_cotizaciones_1"
+            name="telyman.reporte_cotizaciones_1"
+        />
+    </data>
+</openerp>

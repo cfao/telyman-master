@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<data>
+    <template id="reporte_cotizaciones_1">
+        <t t-call="report.html_container">
+            <t t-call="report.internal_layout">
+
+
+<!--     -->
+                <div class="page">
+
+                <div class="header">
+                    <img src='/telyman/static/Imagenes/TelymanLogo.jpg' style="max-height: 45px;"/>
+
+                </div>
+
+                    <div class="oe_structure"/>
+
+
+                    <div>
+                        <!--TelymanLogo.jpg favicon.ico****************************** Contratas ********************************** -->
+                        <strong>
+                            <h1>
+                                <span class="badge badge-secondary">Cotización Proyecto</span>
+                            </h1>
+                        </strong>
+
+
+                     <!--   https://www.odoo.com/forum/help-1/question/create-qweb-pdf-with-data-from-different-models-odoo-9-129358 -->
+
+
+<table class="table">
+
+    <tbody>
+
+
+          <t t-foreach="request.env['cotizaciones_instalaciones.cotizaciones_instalaciones'].search([('codigo', '=', '002079')])" t-as="obj">
+<tr>
+                                        <td>
+                                            <span t-field="obj.codigo"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="obj.cotizacion_cod_sitio"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="obj.cotizacion_cliente"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="obj.cotizacion_fecha_emision"/>
+                                        </td>
+
+
+
+</tr>
+
+
+</t>
+
+
+
+    </tbody>
+
+
+</table>
+
+
+
+
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th data-id="cotizacion_relacionado_id" class="o_column_sortable">
+                                        Cotización
+                                    </th>
+                                    <th data-id="producto_name" class="o_column_sortable">
+                                        Cod Cotización
+                                    </th>
+                                    <th data-id="producto_ud" class="o_column_sortable">
+                                        UND
+                                    </th>
+                                    <th data-id="producto_precio_unitario" class="o_column_sortable">
+                                        Precio Unit
+                                    </th>
+                                    <th data-id="producto_precio_total" class="o_column_sortable">
+                                        Precio Total
+                                    </th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+
+                                <t t-foreach="docs" t-as="productos">
+                                    <tr>
+                                        <td>
+                                            <span t-field="productos.cotizacion_relacionado_id"/>
+                                        </td>
+
+                                        <td>
+                                            <span t-field="productos.producto_name"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="productos.producto_ud"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="productos.producto_precio_unitario"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="productos.producto_precio_total"/>
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+                            </tbody>
+
+
+                             <td>
+                                <strong>Total:</strong>
+                                <t t-esc="sum(productos.producto_precio_total for productos in docs) "/>
+                            </td>
+                           <!--  -->
+
+                        </table>
+                    </div>
+
+
+                </div>
+            </t>
+        </t>
+
+
+    </template>
+
+</data>
+
+
+
+
+
+
+
+
